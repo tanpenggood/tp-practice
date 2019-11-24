@@ -21,16 +21,16 @@ public class Demo1Test {
     }
 
     public static void main(String[] args) {
-        ArrayList<String> targetStarts = new ArrayList<>();
+        ArrayList<String> targetStars = new ArrayList<>();
         String[] stars = {"迪丽热巴,女", "赵丽颖,女", "玛尔扎哈,男", "古力娜扎,女"};
         for (String star : stars) {
             boolean flag = filter(star,
                     str -> "女".equals(str.split(",")[1]),
                     str -> str.split(",")[0].length() == 4);
             if (flag) {
-                targetStarts.add(star);
+                targetStars.add(star);
             }
         }
-        targetStarts.forEach(System.out::println);
+        targetStars.forEach(System.out::println);
     }
 }
