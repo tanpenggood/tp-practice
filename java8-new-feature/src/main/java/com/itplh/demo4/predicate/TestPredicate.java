@@ -3,7 +3,7 @@ package com.itplh.demo4.predicate;
 import java.util.function.Predicate;
 
 /**
- * @description: 断言型接口
+ * @description: 断言型接口 Predicate
  *      boolean test(T t);
  *      default Predicate<T> and(Predicate<? super T> other) {
  *         Objects.requireNonNull(other);
