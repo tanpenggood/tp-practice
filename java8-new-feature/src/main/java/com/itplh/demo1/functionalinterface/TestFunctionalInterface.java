@@ -1,6 +1,12 @@
 package com.itplh.demo1.functionalinterface;
 
-public class Test {
+/**
+ * @description:
+ * @author: tanpeng
+ * @date : 2019-11-24 12:43
+ * @version: v1.0.0
+ */
+public class TestFunctionalInterface {
 
     /**
      * @description: 定义一个参数为函数式接口的方法
@@ -18,7 +24,7 @@ public class Test {
         // 1.实现类
         System.out.println(getName(new MyFunctionalInterfaceImpl()));
 
-        // 2.lambda
-        System.out.println(getName(() -> "lambda"));
+        // 2.supplier
+        System.out.println(getName(() -> "supplier"));
     }
 }
