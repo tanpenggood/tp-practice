@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.function.Supplier;
 
 /**
- * @description: 生产型接口 Supplier
+ * @description: 生产型接口 Supplier 指定什么数据类型，就返回什么数据类型
  *      T get();
  * @author: tanpeng
  * @date: 2019-11-24 11:44
