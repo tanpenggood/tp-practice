@@ -37,12 +37,10 @@ public class MyFilter extends ZuulFilter {
         return 0;
     }
 
-    @Override
     public boolean shouldFilter() {
         return true;
     }
 
-    @Override
     public Object run() {
         RequestContext ctx = RequestContext.getCurrentContext();
         HttpServletRequest request = ctx.getRequest();

@@ -4,7 +4,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
-import org.springframework.cloud.netflix.zuul.EnableZuulServer;
 
 /**
  * 首先指定服务注册中心的地址为http://localhost:8761/eureka/，服务的端口为8888，服务名为service-zuul
