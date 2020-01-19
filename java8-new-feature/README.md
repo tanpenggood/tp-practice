@@ -1,9 +1,9 @@
 ## 目录结构
 
-- demo1.functionalinterface 函数式接口
-- demo2.supplier            生产型接口 T get()
-- demo3.consumer            消费型接口 void accept(T t)
-- demo4.predicate           断言型接口 boolean test(T t)
-- demo5.function            生产型接口 R apply(T t)
+- 函数式接口 demo1.functionalinterface 
+- 生产型接口 demo2.supplier `T get()`
+- 消费型接口 demo3.consumer `void accept(T t)`
+- 断言型接口 demo4.predicate `boolean test(T t)`
+- 生产型接口 demo5.function `R apply(T t)`
 - demo6.stream              
-- demo7.methodreference     方法推断
+- 方法推断 demo7.methodreference     
