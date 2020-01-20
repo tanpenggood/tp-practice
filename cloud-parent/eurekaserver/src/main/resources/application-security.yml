@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: eurekaserver
+  # 默认情况下，eureka不需要认证即可以访问，这样其实是不安全的
+  # 1、引入spring-boot-starter-security为eureka添加用户认证
+  # 2、Eureka Server默认开启了CsrfFilter，导致微服务不能注册成功，因此还需要关闭Eureka Server的CsrfFilter
+  # 3、客户端注册需要携带认证信息 defaultZone: http://eureka:123456@localhost:8761/eureka/
+  security:
+    basic:
+      enable: true
+    user:
+      name: eureka
+      password: 123456
+
+server:
+  port: 8761
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
