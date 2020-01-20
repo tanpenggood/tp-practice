@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 // import App from './App';
 import * as serviceWorker from './serviceWorker';
-// import Clock from './components/Demo3Clock'
-import Button from './components/DemoLife'
+import Toggle from './components/Demo5Toggle4'
 
 // ReactDOM.render(<App />, document.getElementById('root'));
 
@@ -13,4 +12,4 @@ import Button from './components/DemoLife'
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
 
-ReactDOM.render(<Button />, document.getElementById('example'));
+ReactDOM.render(<Toggle />, document.getElementById('example'));

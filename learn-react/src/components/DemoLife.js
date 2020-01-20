@@ -30,16 +30,19 @@ class Content extends React.Component {
 	componentDidMount() {
 		console.log('Component DID MOUNT!')
 	}
-	// 将
+	// 将接收数据props时
 	componentWillReceiveProps(newProps) {
 		console.log('Component WILL RECEIVE PROPS!')
 	}
+	// 是否更新组件
 	shouldComponentUpdate(newProps, newState) {
 		return true;
 	}
+	// 将数据更新
 	componentWillUpdate(nextProps, nextState) {
 		console.log('Component WILL UPDATE!');
 	}
+	// 数据更新结束
 	componentDidUpdate(prevProps, prevState) {
 		console.log('Component DID UPDATE!')
 	}
