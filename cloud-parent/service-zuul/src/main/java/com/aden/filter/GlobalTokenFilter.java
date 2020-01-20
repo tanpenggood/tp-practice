@@ -23,9 +23,9 @@ import javax.servlet.http.HttpServletRequest;
  * @version: 1.0.0
  */
 @Component
-public class MyFilter extends ZuulFilter {
+public class GlobalTokenFilter extends ZuulFilter {
 
-    private static Logger log = LoggerFactory.getLogger(MyFilter.class);
+    private static Logger log = LoggerFactory.getLogger(GlobalTokenFilter.class);
 
     @Override
     public String filterType() {
@@ -34,7 +34,7 @@ public class MyFilter extends ZuulFilter {
 
     @Override
     public int filterOrder() {
-        return 0;
+        return OrderContant.FIRST_FILTER;
     }
 
     public boolean shouldFilter() {
