@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 // import App from './App';
 import * as serviceWorker from './serviceWorker';
-import NumberList from './components/Demo7NumberList'
+import JSXComponent from './components/Demo8JSX'
 
 // ReactDOM.render(<App />, document.getElementById('root'));
 
@@ -12,4 +12,4 @@ import NumberList from './components/Demo7NumberList'
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
 
-ReactDOM.render(<NumberList/>, document.getElementById('example'));
+ReactDOM.render(<JSXComponent/>, document.getElementById('example'));
