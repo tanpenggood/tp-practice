@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 // import App from './App';
 import * as serviceWorker from './serviceWorker';
-import Toggle from './components/Demo5Toggle4'
+import NumberList from './components/Demo7NumberList'
 
 // ReactDOM.render(<App />, document.getElementById('root'));
 
@@ -12,4 +12,4 @@ import Toggle from './components/Demo5Toggle4'
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
 
-ReactDOM.render(<Toggle />, document.getElementById('example'));
+ReactDOM.render(<NumberList/>, document.getElementById('example'));
