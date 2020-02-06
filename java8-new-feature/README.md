@@ -7,4 +7,4 @@
 - 生产型接口 demo5.function `R apply(T t)`
 - demo6.stream              
 - 方法推断 demo7.methodreference     
-- CompletableFuture demo7.complatablefature     
+- CompletableFuture demo8.completablefuture     
