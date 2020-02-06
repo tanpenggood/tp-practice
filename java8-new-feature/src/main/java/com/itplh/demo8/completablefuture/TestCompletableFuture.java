@@ -1,4 +1,4 @@
-package com.itplh.demo8.complatablefature;
+package com.itplh.demo8.completablefuture;
 
 import java.util.Arrays;
 import java.util.Optional;
