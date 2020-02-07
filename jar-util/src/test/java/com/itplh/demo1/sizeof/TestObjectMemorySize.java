@@ -1,6 +1,8 @@
 package com.itplh.demo1.sizeof;
 
 import com.carrotsearch.sizeof.RamUsageEstimator;
+import com.itplh.util.TestFileUtil;
+import org.junit.Test;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -17,14 +19,6 @@ import java.util.HashMap;
  */
 public class TestObjectMemorySize {
 
-    public static void main(String[] args) {
-        // 测试15W initialCapacity为6的Map，每个Map三条数据的所占内存的大小
-        test15wFixLengthMapMemorySize(); // 29440616
-
-        // 测试15W initialCapacity为默认值的Map，每个Map三条数据的所占内存的大小
-        test15wDefaultMapMemorySize(); // 34240616
-    }
-
     /**
      * @description: 测试15W initialCapacity为6的Map，每个Map三条数据的所占内存的大小
      * 2020-02-06 12:47:08 object size: 29440616
@@ -32,8 +26,8 @@ public class TestObjectMemorySize {
      * @date : 2020-02-06 12:50
      * @version: v1.0.0
      */
-    private static void test15wFixLengthMapMemorySize() {
-        //
+    @Test
+    public void test15wFixLengthMapMemorySize() {
         ArrayList<HashMap<String, String>> list = new ArrayList<>();
         for (int i = 0; i < 150000; i++) {
             list.add(new HashMap<String, String>(6) {{
@@ -52,8 +46,8 @@ public class TestObjectMemorySize {
      * @date : 2020-02-06 12:50
      * @version: v1.0.0
      */
-    private static void test15wDefaultMapMemorySize() {
-        //
+    @Test
+    public void test15wDefaultMapMemorySize() {
         ArrayList<HashMap<String, String>> list = new ArrayList<>();
         for (int i = 0; i < 150000; i++) {
             list.add(new HashMap<String, String>() {{
@@ -71,13 +65,13 @@ public class TestObjectMemorySize {
      * @date : 2020/2/5 15:35
      * @version: v1.0.0
      */
-    private static void recordSizeOf(Object o) {
+    public static void recordSizeOf(Object o) {
         try (
                 // 缓冲区默认8092kb
-                BufferedWriter bw = new BufferedWriter(new FileWriter("./sizeof.txt", true))
+                BufferedWriter bw = new BufferedWriter(new FileWriter(TestFileUtil.getPath() + "sizeof.txt", true))
         ) {
             String nowTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-            String str = nowTime + " object size: " + RamUsageEstimator.sizeOf(o);
+            String str = nowTime + " object size: " + RamUsageEstimator.sizeOf(o) + "byte";
             bw.append(str);
             bw.newLine();
             bw.flush();
