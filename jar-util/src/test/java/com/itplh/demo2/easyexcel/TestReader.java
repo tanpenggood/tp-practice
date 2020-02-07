@@ -13,6 +13,8 @@ import com.itplh.demo2.easyexcel.read.ReaderData;
 import com.itplh.util.TestFileUtil;
 import org.junit.Test;
 
+import java.util.List;
+
 /**
  * @description:
  * @author: tanpeng
@@ -25,14 +27,14 @@ public class TestReader {
     public static final String FILE_NAME_XLS = "simpleWrite.xls";
 
     /**
-     * 最简单的读
+     * 异步读
      * <p>
      * 1. 由于默认异步读取excel，所以需要创建excel一行一行的回调监听器，参照{@link ObjectListener}
      * <p>
      * 2. 直接读即可
      */
     @Test
-    public void simpleReader() {
+    public void asyncReader() {
         ObjectListener listener = new ObjectListener();
         // 这里 需要指定监听器用于存储数据，然后读取第一个sheet 文件流会自动关闭
         EasyExcel.read(TestFileUtil.readFile(FILE_NAME_XLSX), listener)
@@ -42,6 +44,21 @@ public class TestReader {
                 .doRead();
         System.out.println(listener.getList().stream().count());
         listener.getList().stream().forEach(System.out::println);
+    }
+
+    /**
+     * @description: 同步读
+     * @author: tanpeng
+     * @date : 2020-02-07 15:57
+     * @version: v1.0.0
+     */
+    @Test
+    public void syncReader() {
+        List<Object> list = EasyExcel.read(TestFileUtil.readFile(FILE_NAME_XLSX))
+                .sheet()
+                .doReadSync();
+        System.out.println(list.stream().count());
+        list.stream().forEach(System.out::println);
     }
 
     /**
