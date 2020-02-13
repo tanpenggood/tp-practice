@@ -6,8 +6,8 @@ import com.itplh.demo2.easyexcel.converter.CustomDateTimeConverter;
 import com.itplh.demo2.easyexcel.converter.CustomDisabledConverter;
 import com.itplh.demo2.easyexcel.converter.CustomTitleConverter;
 import com.itplh.demo2.easyexcel.listener.ConverterDataListener;
-import com.itplh.demo2.easyexcel.listener.ReaderDataListener;
 import com.itplh.demo2.easyexcel.listener.ObjectListener;
+import com.itplh.demo2.easyexcel.listener.ReaderDataListener;
 import com.itplh.demo2.easyexcel.read.ConverterData;
 import com.itplh.demo2.easyexcel.read.ReaderData;
 import com.itplh.util.TestFileUtil;
@@ -59,6 +59,22 @@ public class TestReader {
                 .doReadSync();
         System.out.println(list.stream().count());
         list.stream().forEach(System.out::println);
+    }
+
+    /**
+     * @description: 读取所有sheet的数据
+     * @author: tanpeng
+     * @date : 2020-02-13 10:50
+     * @version: v1.0.0
+     */
+    @Test
+    public void doReadAll() {
+        ObjectListener listener = new ObjectListener();
+        // 这里 需要指定监听器用于存储数据，然后读取第一个sheet 文件流会自动关闭
+        EasyExcel.read(TestFileUtil.readFile(FILE_NAME_XLSX), listener)
+                .doReadAll();
+        System.out.println(listener.getList().stream().count());
+        listener.getList().stream().forEach(System.out::println);
     }
 
     /**
