@@ -1,7 +1,9 @@
 package com.itplh.demo2.easyexcel;
 
 import com.alibaba.excel.EasyExcel;
+import com.alibaba.excel.annotation.format.DateTimeFormat;
 import com.alibaba.excel.converters.DefaultConverterLoader;
+import com.alibaba.excel.exception.ExcelAnalysisException;
 import com.itplh.demo2.easyexcel.converter.CustomDateTimeConverter;
 import com.itplh.demo2.easyexcel.converter.CustomDisabledConverter;
 import com.itplh.demo2.easyexcel.converter.CustomTitleConverter;
@@ -91,17 +93,18 @@ public class TestReader {
      */
     @Test
     public void converterRead() {
-        ConverterDataListener converterDataListener = new ConverterDataListener();
-        // 这里 需要指定读用哪个class去读，然后读取第一个sheet
-        EasyExcel.read(TestFileUtil.getPath() + FILE_NAME_XLSX, ConverterData.class, converterDataListener)
-                // 这里注意 我们也可以registerConverter来指定自定义转换器， 但是这个转换变成全局了， 所有java为string,excel为string的都会用这个转换器。
-                // 如果就想单个字段使用请使用@ExcelProperty 指定converter
-                // .registerConverter(new CustomStringStringConverter())
-                // 读取sheet
-                .sheet()
-                .doRead();
-        System.out.println(converterDataListener.getList().stream().count());
-        converterDataListener.getList().stream().forEach(System.out::println);
+        try {
+            // 这里 需要指定读用哪个class去读，然后读取第一个sheet
+            EasyExcel.read(TestFileUtil.getPath() + FILE_NAME_XLSX, ConverterData.class, new ConverterDataListener())
+                    // 这里注意 我们也可以registerConverter来指定自定义转换器， 但是这个转换变成全局了， 所有java为string,excel为string的都会用这个转换器。
+                    // 如果就想单个字段使用请使用@ExcelProperty 指定converter
+                    // .registerConverter(new CustomStringStringConverter())
+                    // 读取sheet
+                    .sheet()
+                    .doRead();
+        } catch (ExcelAnalysisException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
