@@ -7,6 +7,7 @@ import com.itplh.util.TestFileUtil;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -23,9 +24,10 @@ public class TestWriter {
     public static final String FILE_NAME_XLS = "simpleWrite.xls";
 
     /**
-     * 最简单的写
+     * 最简单的写 使用定义的对象写
      * <p>1. 创建excel对应的实体对象 参照{@link WriteData}
-     * <p>2. 直接写即可
+     * <p>2. 获取写入的数据 List<Class>
+     * <p>3. 直接写即可
      */
     @Test
     public void simpleWrite() {
@@ -35,6 +37,32 @@ public class TestWriter {
                 .excelType(ExcelTypeEnum.XLSX)
                 .sheet("demoData")
                 .doWrite(data());
+    }
+
+    /**
+     * 使用list写
+     * <p>1. 定义List<List<String>>结构的表头
+     * <p>2. 定义List<List<Object>>结构的数据
+     * <p>3. 写数据
+     */
+    @Test
+    public void listWrite() {
+        List<List<String>> head = new ArrayList<>();
+        head.add(Arrays.asList("head1"));
+        head.add(Arrays.asList("head2"));
+        head.add(Arrays.asList("head3"));
+        head.add(Arrays.asList("head4"));
+
+        List<List<Object>> data = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            data.add(Arrays.asList("字符串" + i, new Date(), 0.56, (i % 2 == 0)));
+        }
+
+        EasyExcel.write(TestFileUtil.createNewFile(FILE_NAME_XLSX))
+                .excelType(ExcelTypeEnum.XLSX)
+                .head(head)
+                .sheet("demoData")
+                .doWrite(data);
     }
 
     /**
