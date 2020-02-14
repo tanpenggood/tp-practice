@@ -1,7 +1,9 @@
 package com.itplh.demo2.easyexcel;
 
 import com.alibaba.excel.EasyExcel;
+import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.support.ExcelTypeEnum;
+import com.alibaba.excel.write.metadata.WriteSheet;
 import com.itplh.demo2.easyexcel.write.WriteData;
 import com.itplh.util.TestFileUtil;
 import org.junit.Test;
@@ -62,7 +64,39 @@ public class TestWriter {
                 .excelType(ExcelTypeEnum.XLSX)
                 .head(head)
                 .sheet("demoData")
-                .doWrite(data);
+             .doWrite(data);
+    }
+
+    /**
+     * @description: 往excel中写多个sheet
+     * 1、构建{@link ExcelWriter}
+     * 2、构建{@link WriteSheet}
+     * 3、往sheet写入数据
+     * 4、调用{@link ExcelWriter#finish()}，否则数据不会写到文件中
+     * @author: tanpeng
+     * @date : 2020-02-14 11:22
+     * @version: v1.0.0
+     */
+    @Test
+    public void writeManySheet() {
+        // 1、构建ExcelWriter对象
+        ExcelWriter excelWriter = EasyExcel.write(TestFileUtil.createNewFile(FILE_NAME_XLSX), WriteData.class)
+                .excelType(ExcelTypeEnum.XLSX)
+                .build();
+
+        // 2、构建WriteSheet对象
+        WriteSheet sheet1 = EasyExcel.writerSheet(1, "sheet1").build();
+        WriteSheet sheet2 = EasyExcel.writerSheet(2, "sheet2").build();
+        WriteSheet sheet3 = EasyExcel.writerSheet(3, "sheet3").build();
+
+        // 3、往sheet写入数据
+        excelWriter.write(data(), sheet1);
+        excelWriter.write(data(), sheet2);
+        excelWriter.write(data(), sheet3);
+
+        // 4、调用finish，否则数据不会写到文件中
+        // ps: 即使构建ExcelWriter时设置了autoCloseStream(true) 这里也必须要调用finish
+        excelWriter.finish();
     }
 
     /**
