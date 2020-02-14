@@ -85,10 +85,10 @@ public class TestReader {
         ReadSheet sheet2 = EasyExcel.readSheet(1).build();
         ReadSheet sheet3 = EasyExcel.readSheet(2).build();
 
-        // excelReader.read(sheet1);excelReader.read(sheet1); 重复读会出现如下异常
+        // excelReader.read(sheet1);excelReader.read(sheet1); 重复读，会出现如下异常
         // com.alibaba.excel.exception.ExcelAnalysisException: Cannot read sheet repeatedly.
 
-        // 未读完提前关闭流 excelReader.read(sheet1).finish();excelReader.read(sheet2);
+        // excelReader.read(sheet1).finish();excelReader.read(sheet2); 未读完提前关闭流，会出现如下异常
         // com.alibaba.excel.exception.ExcelAnalysisException: java.io.IOException: Stream closed
 
         excelReader.read(sheet1, sheet2, sheet3);
