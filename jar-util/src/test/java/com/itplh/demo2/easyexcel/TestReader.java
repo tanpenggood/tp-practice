@@ -1,9 +1,12 @@
 package com.itplh.demo2.easyexcel;
 
 import com.alibaba.excel.EasyExcel;
+import com.alibaba.excel.ExcelReader;
 import com.alibaba.excel.annotation.format.DateTimeFormat;
 import com.alibaba.excel.converters.DefaultConverterLoader;
+import com.alibaba.excel.event.SyncReadListener;
 import com.alibaba.excel.exception.ExcelAnalysisException;
+import com.alibaba.excel.read.metadata.ReadSheet;
 import com.itplh.demo2.easyexcel.converter.CustomDateTimeConverter;
 import com.itplh.demo2.easyexcel.converter.CustomDisabledConverter;
 import com.itplh.demo2.easyexcel.converter.CustomTitleConverter;
@@ -61,6 +64,40 @@ public class TestReader {
                 .doReadSync();
         System.out.println(list.stream().count());
         list.stream().forEach(System.out::println);
+    }
+
+    /**
+     * @description: 读excel中的多个sheet
+     * 1、构建{@link ExcelReader}
+     * 2、构建{@link ReadSheet}
+     * 3、读取sheet的数据
+     * 4、调用{@link ExcelReader#finish()}，读的时候会创建临时文件，到时磁盘会崩的
+     * @author: tanpeng
+     * @date : 2020-02-14 12:06
+     * @version: v1.0.0
+     */
+    @Test
+    public void readManySheet() {
+        SyncReadListener listener = new SyncReadListener();
+        ExcelReader excelReader = EasyExcel.read(TestFileUtil.readFile(FILE_NAME_XLSX), listener).build();
+
+        ReadSheet sheet1 = EasyExcel.readSheet(0).build();
+        ReadSheet sheet2 = EasyExcel.readSheet(1).build();
+        ReadSheet sheet3 = EasyExcel.readSheet(2).build();
+
+        // excelReader.read(sheet1);excelReader.read(sheet1); 重复读会出现如下异常
+        // com.alibaba.excel.exception.ExcelAnalysisException: Cannot read sheet repeatedly.
+
+        // 未读完提前关闭流 excelReader.read(sheet1).finish();excelReader.read(sheet2);
+        // com.alibaba.excel.exception.ExcelAnalysisException: java.io.IOException: Stream closed
+
+        excelReader.read(sheet1, sheet2, sheet3);
+
+        System.out.println(listener.getList().size());
+        listener.getList().stream().forEach(System.out::println);
+
+        // 这里千万别忘记关闭，读的时候会创建临时文件，到时磁盘会崩的
+        excelReader.finish();
     }
 
     /**
