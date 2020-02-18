@@ -1,5 +1,7 @@
 package com.aden.biz;
 
+import com.aden.util.FileUtils;
+
 /**
  * @description:
  * @author: tanpeng
@@ -8,7 +10,8 @@ package com.aden.biz;
  */
 public interface Git {
 
-    String ROOT_DIR = "e:/code/aden/Z-jenkins/test";
+//    String ROOT_DIR = "e:/code/aden/Z-jenkins/test";
+    String ROOT_DIR = "/Users/tanpeng/tp-code";
 
     void clone2(String gitURL);
 
@@ -19,4 +22,12 @@ public interface Git {
     void push();
 
     void template();
+
+    default StringBuilder buildString() {
+        StringBuilder builder = new StringBuilder();
+        if (FileUtils.isWindows()) {
+            builder.append(String.format("%s: && ", ROOT_DIR.substring(0, ROOT_DIR.indexOf(":"))));
+        }
+        return builder;
+    }
 }

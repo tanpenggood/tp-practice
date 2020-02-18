@@ -16,9 +16,8 @@ import java.nio.file.Paths;
 public class FileUtils {
 
     public static boolean exists(String first, String... more) {
-        //boolean exists = Files.exists(Paths.get(first, more));
-        boolean exists = Paths.get(first, more).toFile().exists();
-        return exists;
+        // return Files.exists(Paths.get(first, more));
+        return Paths.get(first, more).toFile().exists();
     }
 
     public static void createDirectories(String first, String... more) {
@@ -30,7 +29,9 @@ public class FileUtils {
     }
 
     public static void forceDelete(String first, String... more) {
-        CommandExecutor.executor.execute("rd /s /q " + Paths.get(first, more).toString());
+        String delCommand = isWindows() ? "rd /s /q " : "rm -rf ";
+        String deletePath = Paths.get(first, more).toString();
+        CommandExecutor.executor.execute(delCommand + deletePath);
     }
 
     public static void createDirectoriesIfExistClean(String rootDir, String projectParentDir, String projectDir) {
@@ -41,6 +42,15 @@ public class FileUtils {
         } else {
             FileUtils.createDirectories(rootDir, projectParentDir);
         }
+    }
+
+    public static void copy(String sourceAbsPath, String targetAbsPath) {
+        String copyCommand = isWindows() ? "copy " : "cp -r";
+        CommandExecutor.executor.execute(String.join(" ", copyCommand, sourceAbsPath, targetAbsPath));
+    }
+
+    public static boolean isWindows() {
+        return System.getProperty("os.name").toLowerCase().contains("win");
     }
 
 }

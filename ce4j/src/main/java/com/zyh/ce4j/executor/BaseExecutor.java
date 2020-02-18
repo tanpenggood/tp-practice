@@ -1,12 +1,12 @@
 package com.zyh.ce4j.executor;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
 import com.zyh.ce4j.domain.ExecutedResult;
 import com.zyh.ce4j.domain.Result;
 import com.zyh.ce4j.strategy.CheckStrategy;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class BaseExecutor implements Executor{
 
@@ -85,7 +85,7 @@ public class BaseExecutor implements Executor{
         }
     }
 
-	private void processOutputHandle(final ExecutedResult result,final Process pr, final String comandLine, MutilComandsStream mcs) throws InterruptedException {
+	private void processOutputHandle(final ExecutedResult result,final Process pr, final String commandLine, MutilComandsStream mcs) throws InterruptedException {
 		StreamGobbler errorGobbler = null;
     	if(this.useErrorStreamGobbler) {
     		if(mcs == null) {
@@ -109,9 +109,9 @@ public class BaseExecutor implements Executor{
         	Result res = errorGobbler.exeResult(this.errorCes);
         	result.setStatus(res.getStatus());
         	if(res.getStatus().equals(Result.Status.FAILURE)) {
-        		res.setMsg(String.format("execute command line[%s] ,last print: %s, failed: %s", comandLine, stdoutGobbler.getLastPrint(), res.getMsg()));
+        		res.setMsg(String.format("execute command line[%s] ,last print: %s, failed: %s", commandLine, stdoutGobbler.getLastPrint(), res.getMsg()));
         	}else if(res.getStatus().equals(Result.Status.UNKNOWN)) {
-        		res.setMsg(String.format("execute command line[%s] ,last print: %s", comandLine, stdoutGobbler.getLastPrint()));
+        		res.setMsg(String.format("execute command line[%s] ,last print: %s", commandLine, stdoutGobbler.getLastPrint()));
         	}
         	result.setErrorResult(res);
     	}
@@ -119,42 +119,47 @@ public class BaseExecutor implements Executor{
         	Result res = stdoutGobbler.exeResult(this.stdoutCes);
         	result.setStatus(res.getStatus());
         	if(res.getStatus().equals(Result.Status.FAILURE)) {
-        		res.setMsg(String.format("execute command line[%s] ,last print: %s, failed: %s", comandLine, stdoutGobbler.getLastPrint(), res.getMsg()));
+        		res.setMsg(String.format("execute command line[%s] ,last print: %s, failed: %s", commandLine, stdoutGobbler.getLastPrint(), res.getMsg()));
         	}else if(res.getStatus().equals(Result.Status.UNKNOWN)) {
-        		res.setMsg(String.format("execute command line[%s] ,last print: %s", comandLine, stdoutGobbler.getLastPrint()));
+        		res.setMsg(String.format("execute command line[%s] ,last print: %s", commandLine, stdoutGobbler.getLastPrint()));
         	}
         	result.setStdoutResult(res);
     	}
 	}
 
 	@Override
-	public ExecutedResult execute(String comandLine) {
+	public ExecutedResult execute(String commandLine) {
+		System.out.println(commandLine);
 		ExecutedResult result = new ExecutedResult();
 		try {
-        	Process pr = Runtime.getRuntime().exec("cmd /c " + comandLine);
-        	processOutputHandle(result,pr, comandLine, null);
+			if (isWin()) {
+				commandLine = "cmd /c " + commandLine;
+			}
+        	Process pr = Runtime.getRuntime().exec(commandLine);
+        	processOutputHandle(result,pr, commandLine, null);
 		} catch (IOException | InterruptedException e) {
 			result.setStatus(Result.Status.FAILURE);
-			result.setErrorResult(new Result(Result.Status.FAILURE, String.format("execute command line[%s] failed: {%s}",comandLine,e.getMessage()), null));
+			result.setErrorResult(new Result(Result.Status.FAILURE, String.format("execute command line[%s] failed: {%s}",commandLine,e.getMessage()), null));
 		}
 		return result;
 	}
 
 	@Override
-	public ExecutedResult executeMutilShell(List<String> comandLine) {
+	public ExecutedResult executeMutilShell(List<String> commandLine) {
+		System.out.println(commandLine.toString());
 		ExecutedResult result = new ExecutedResult();
 		if(isWin()) {
 			result.setStatus(Result.Status.REJECT);
-			result.setErrorResult(new Result(Result.Status.REJECT, "该方法不支持执行win的多命令行，推荐使用[execute(String comandLine)]", null));
+			result.setErrorResult(new Result(Result.Status.REJECT, "该方法不支持执行win的多命令行，推荐使用[execute(String commandLine)]", null));
 			return result;
 		}
 		try {
 			Process pr = Runtime.getRuntime().exec("/bin/bash", null, null);
 			//多命令行
-			MutilComandsStream mcs = new MutilComandsStream(pr.getOutputStream(), comandLine);
-			processOutputHandle(result, pr, String.join("&&", comandLine), mcs);
+			MutilComandsStream mcs = new MutilComandsStream(pr.getOutputStream(), commandLine);
+			processOutputHandle(result, pr, String.join("&&", commandLine), mcs);
 		} catch (IOException | InterruptedException e) {
-			result.setErrorResult(new Result(Result.Status.FAILURE, String.format("execute command line[%s] failed: {%s}",comandLine,e.getMessage()), null));
+			result.setErrorResult(new Result(Result.Status.FAILURE, String.format("execute command line[%s] failed: {%s}",commandLine,e.getMessage()), null));
 		}
 		return result;
 	}
