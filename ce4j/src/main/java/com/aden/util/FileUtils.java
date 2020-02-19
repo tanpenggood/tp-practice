@@ -43,11 +43,15 @@ public class FileUtils {
             return;
         }
         // 删除目录
-        String delCommand = isWindows() ? "rd /s /q" : "rm -rf";
-        String commandLine = new StringBuilder()
-                .append(String.format("%s %s", delCommand, filePath))
-                .toString();
-        CommandExecutor.executor.execute(commandLine);
+        if (isWindows()) {
+            String commandLine = new StringBuilder()
+                    .append(String.format("cd %s ", file.getParentFile().getAbsolutePath()))
+                    .append(String.format("&& rd /s /q %s", file.getName()))
+                    .toString();
+            CommandExecutor.executor.execute(commandLine);
+        } else {
+            CommandExecutor.executor.executeMutilShell(Arrays.asList(String.format("rm -rf %s", filePath)));
+        }
     }
 
     public static void createDirectoriesIfExistClean(String rootDir, String projectParentDir, String projectDir) {
