@@ -65,9 +65,9 @@ public class FileUtils {
         // cp -r /home/data/ /home/data2     复制过程中不会忽略隐藏文件
         // xcopy e:/arms/data e:/arms/data2  windows 复制过程中不会忽略隐藏文件
         if (isWindows()) {
-            CommandExecutor.executor.execute(String.join(" ", "xcopy", sourceAbsPath, targetAbsPath));
+            CommandExecutor.executor.execute(String.join(" ", "xcopy /s /q", sourceAbsPath, targetAbsPath));
         } else {
-            CommandExecutor.executor.executeMutilShell(Arrays.asList(String.join(" ", "cp -r", sourceAbsPath + "／", targetAbsPath)));
+            CommandExecutor.executor.executeMutilShell(Arrays.asList(String.join(" ", "cp -r", sourceAbsPath + "/", targetAbsPath)));
         }
     }
 
