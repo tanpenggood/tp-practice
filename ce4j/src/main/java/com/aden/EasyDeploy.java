@@ -15,5 +15,6 @@ public class EasyDeploy {
                            Git sourceGit,
                            Git targetGit) {
         deployTemplate.template(sourceGit, targetGit);
+        System.out.println("\n");
     }
 }

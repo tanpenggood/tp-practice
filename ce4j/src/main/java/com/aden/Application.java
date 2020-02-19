@@ -2,7 +2,7 @@ package com.aden;
 
 import com.aden.command.SourceCodeImpl;
 import com.aden.command.TargetCodeImpl;
-import com.aden.template.DeployGiteeImpl;
+import com.aden.template.DeployARMsBeiJing2ChongQingImpl;
 
 /**
  * @description:
@@ -19,9 +19,13 @@ public class Application {
         String CQ_FRONT_URL = "git@192.168.0.152:jenkins-group/arms-frontend.git";
         String CQ_BACK_URL = "git@192.168.0.152:jenkins-group/arms-backend.git";
 
-        EasyDeploy.run(new DeployGiteeImpl(),
-                new SourceCodeImpl("git@gitee.com:tpswpu/swagger-spring.git"),
-                new TargetCodeImpl("git@gitee.com:tpswpu/swagger-spring.git"));
+        EasyDeploy.run(new DeployARMsBeiJing2ChongQingImpl(),
+                new SourceCodeImpl(BJ_FRONT_URL),
+                new TargetCodeImpl(CQ_FRONT_URL));
+
+        EasyDeploy.run(new DeployARMsBeiJing2ChongQingImpl(),
+                new SourceCodeImpl(BJ_BACK_URL),
+                new TargetCodeImpl(CQ_BACK_URL));
 
     }
 }
