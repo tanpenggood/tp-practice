@@ -28,10 +28,20 @@ public class FileUtils {
         }
     }
 
-    public static void forceDelete(String first, String... more) {
+    public static void forceDelete(String... more) {
+        String filePath = String.join("/", more);
+        File file = new File(filePath);
+        // 删除文件
+        if (file.isFile()) {
+            file.delete();
+            return;
+        }
+        // 删除目录
         String delCommand = isWindows() ? "rd /s /q " : "rm -rf ";
-        String deletePath = Paths.get(first, more).toString();
-        CommandExecutor.executor.execute(delCommand + deletePath);
+        String commandLine = new StringBuilder()
+                .append(String.format("%s %s", delCommand, filePath))
+                .toString();
+        CommandExecutor.executor.execute(commandLine);
     }
 
     public static void createDirectoriesIfExistClean(String rootDir, String projectParentDir, String projectDir) {
