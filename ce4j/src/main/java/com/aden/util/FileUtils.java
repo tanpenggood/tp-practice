@@ -1,11 +1,12 @@
 package com.aden.util;
 
-import com.aden.CommandExecutor;
+import com.aden.command.CommandExecutor;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Arrays;
 
 /**
  * @description:
@@ -16,7 +17,6 @@ import java.nio.file.Paths;
 public class FileUtils {
 
     public static boolean exists(String first, String... more) {
-        // return Files.exists(Paths.get(first, more));
         return Paths.get(first, more).toFile().exists();
     }
 
@@ -28,6 +28,12 @@ public class FileUtils {
         }
     }
 
+    /**
+     * @description: 删除文件／目录
+     * @author: tanpeng
+     * @date : 2020-02-19 12:04
+     * @version: v1.0.0
+     */
     public static void forceDelete(String... more) {
         String filePath = String.join("/", more);
         File file = new File(filePath);
@@ -55,8 +61,11 @@ public class FileUtils {
     }
 
     public static void copy(String sourceAbsPath, String targetAbsPath) {
-        String copyCommand = isWindows() ? "copy " : "cp -r";
-        CommandExecutor.executor.execute(String.join(" ", copyCommand, sourceAbsPath, targetAbsPath));
+        if (isWindows()) {
+            CommandExecutor.executor.execute(String.join(" ", "copy", sourceAbsPath, targetAbsPath));
+        } else {
+            CommandExecutor.executor.executeMutilShell(Arrays.asList(String.join(" ", "cp -r", sourceAbsPath, targetAbsPath)));
+        }
     }
 
     public static boolean isWindows() {
