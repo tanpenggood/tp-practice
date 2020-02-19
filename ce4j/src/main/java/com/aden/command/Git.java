@@ -194,9 +194,7 @@ public abstract class Git {
     }
 
     public void copy(String sourceAbsPath, String targetAbsPath) {
-        // cp -r /home/data/* /home/data2   不会复制data目录下的隐藏文件
-        // cp -r /home/data/ /home/data2   可以复制data目录下的隐藏文件
-        FileUtils.copy(sourceAbsPath + "/", targetAbsPath);
+        FileUtils.copy(sourceAbsPath, targetAbsPath);
     }
 
     /**
