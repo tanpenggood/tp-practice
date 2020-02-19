@@ -1,4 +1,4 @@
-package com.aden;
+package com.aden.command;
 
 import com.zyh.ce4j.executor.BaseExecutor;
 import com.zyh.ce4j.strategy.ColonEndStrategy;
