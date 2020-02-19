@@ -44,11 +44,8 @@ public class FileUtils {
         }
         // 删除目录
         if (isWindows()) {
-            String commandLine = new StringBuilder()
-                    .append(String.format("cd %s ", file.getParentFile().getAbsolutePath()))
-                    .append(String.format("&& rd /s /q %s", file.getName()))
-                    .toString();
-            CommandExecutor.executor.execute(commandLine);
+            // 执行windows命令时 多级路径时需要使用双引号包裹
+            CommandExecutor.executor.execute(String.format("rd /s /q \"%s\"", filePath));
         } else {
             CommandExecutor.executor.executeMutilShell(Arrays.asList(String.format("rm -rf %s", filePath)));
         }
@@ -67,11 +64,13 @@ public class FileUtils {
     public static void copy(String sourceAbsPath, String targetAbsPath) {
         // cp -r /home/data/* /home/data2    复制过程中会忽略隐藏文件
         // cp -r /home/data/ /home/data2     复制过程中不会忽略隐藏文件
-        // xcopy e:/arms/data e:/arms/data2  windows 复制过程中不会忽略隐藏文件
+        // xcopy "e:/arms/data" "e:/arms/data2"  windows 复制过程中不会忽略隐藏文件，多级路径时需要使用双引号包裹
         if (isWindows()) {
-            CommandExecutor.executor.execute(String.join(" ", "xcopy", sourceAbsPath, targetAbsPath, "/s /q /i"));
+            CommandExecutor.executor.execute(String.format("xcopy \"%s\" \"%s\" /s /q /i", sourceAbsPath, targetAbsPath));
         } else {
-            CommandExecutor.executor.executeMutilShell(Arrays.asList(String.join(" ", "cp -r", sourceAbsPath + "/", targetAbsPath)));
+            String commandLine = new StringBuilder()
+                    .append(String.format("cp -r %s/ %s", sourceAbsPath, targetAbsPath)).toString();
+            CommandExecutor.executor.executeMutilShell(Arrays.asList(commandLine));
         }
     }
 
