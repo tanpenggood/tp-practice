@@ -8,7 +8,7 @@ import com.aden.biz.Git;
  * @date: 2020-02-18 12:09
  * @version: 1.0.0
  */
-public class GitChongQingImpl implements Git {
+public class GitChongQingWindowsClientImpl implements Git {
 
     public static final String TARGET_DIR = "cq";
     public static final String CQ_FRONT_DIR = TARGET_DIR + "/arms-frontend";

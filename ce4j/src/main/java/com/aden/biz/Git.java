@@ -24,10 +24,6 @@ public interface Git {
     void template();
 
     default StringBuilder buildString() {
-        StringBuilder builder = new StringBuilder();
-        if (FileUtils.isWindows()) {
-            builder.append(String.format("%s: && ", ROOT_DIR.substring(0, ROOT_DIR.indexOf(":"))));
-        }
-        return builder;
+        return new StringBuilder();
     }
 }
