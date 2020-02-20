@@ -2,6 +2,7 @@ package com.itplh.push.template;
 
 import com.itplh.push.command.Git;
 import com.itplh.push.util.FileUtils;
+import com.itplh.push.util.StringUtils;
 
 /**
  * @description:
@@ -20,11 +21,12 @@ public class DefaultTemplate extends Template {
 
         FileUtils.createDirectoriesIfExistClean(git.getRootDir(), git.getProjectDir());
 
+        String tag = StringUtils.buildTag();
         git.clone(git.getSourceGitURL())
                 .checkout("develop")
                 .remote("add", git.getTargetGitURLs())
-                .tag("tag-v1")
-                .push("origin", "tag-v1");
+                .tag(tag)
+                .push("origin", tag);
     }
 
 }
