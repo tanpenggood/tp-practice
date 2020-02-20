@@ -1,6 +1,7 @@
 package com.itplh.push.command;
 
 import com.itplh.push.util.FileUtils;
+import com.itplh.push.util.StringUtils;
 
 import java.util.Collections;
 import java.util.Map;
@@ -20,7 +21,7 @@ public abstract class Git implements Command {
 
     protected Git() {
         // 默认配置
-        this.rootDir = FileUtils.isWindows() ? "C:/Users/Default/Downloads/easypush" : "/Users/tanpeng/tp-file/easypush";
+        this.rootDir = FileUtils.isWindows() ? "C:/Users/Default/Downloads/easypush" : "/Users/tanpeng/Downloads/easypush";
         this.sourceGitURL = "";
         this.targetGitURLs = Collections.EMPTY_MAP;
     }
@@ -29,6 +30,25 @@ public abstract class Git implements Command {
         String gitURL = this.sourceGitURL;
         String projectDir = gitURL.substring(gitURL.lastIndexOf("/") + 1, gitURL.lastIndexOf(".git"));
         return Optional.ofNullable(projectDir).orElse("");
+    }
+
+    public String getWindowsDisk() {
+        String disk = getRootDir().substring(0, getRootDir().indexOf(":") + 1);
+        if (StringUtils.isEmpty(disk)) {
+            throw new RuntimeException("rootDir请使用绝对路径");
+        }
+        return disk;
+    }
+
+    protected StringBuilder commandBuilder() {
+        StringBuilder builder = new StringBuilder();
+        if (FileUtils.isWindows()) {
+            builder.append(getWindowsDisk())
+                    .append(String.format(" && cd %s/%s ", getRootDir(), getProjectDir()));
+        } else {
+            builder.append(String.format("cd %s;", getRootDir()));
+        }
+        return builder;
     }
 
     public String getRootDir() {
