@@ -1,12 +1,10 @@
 package com.itplh.push.util;
 
-import com.aden.command.CommandExecutor;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 
 /**
  * @description:
@@ -22,33 +20,42 @@ public class FileUtils {
 
     public static void createDirectories(String first, String... more) {
         try {
-            Files.createDirectories(Paths.get(first, more));
+            Path path = Paths.get(first, more);
+            if (!path.toFile().exists()) {
+                Files.createDirectories(path);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public static void forceDelete(String... more) {
-        String filePath = String.join("/", more);
-        File file = new File(filePath);
-        // 删除文件
+    /**
+     * delete file, reference easyexcel FileUtils.delete
+     *
+     * @param file
+     */
+    public static void delete(File file) {
         if (file.isFile()) {
             file.delete();
             return;
         }
-        // 删除目录
-        if (isWindows()) {
-            // 执行windows命令时 多级路径时需要使用双引号包裹
-            CommandExecutor.executor.execute(String.format("rd /s /q \"%s\"", filePath));
-        } else {
-            CommandExecutor.executor.executeMutilShell(Arrays.asList(String.format("rm -rf %s", filePath)));
+        if (file.isDirectory()) {
+            File[] childFiles = file.listFiles();
+            if (childFiles == null || childFiles.length == 0) {
+                file.delete();
+                return;
+            }
+            for (int i = 0; i < childFiles.length; i++) {
+                delete(childFiles[i]);
+            }
+            file.delete();
         }
     }
 
     public static void createDirectoriesIfExistClean(String rootDir, String projectDir) {
         if (FileUtils.exists(rootDir)) {
             if (FileUtils.exists(rootDir, projectDir)) {
-                FileUtils.forceDelete(rootDir, projectDir);
+                FileUtils.delete(new File(rootDir, projectDir));
             }
         } else {
             FileUtils.createDirectories(rootDir);
