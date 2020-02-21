@@ -4,8 +4,15 @@
 千里之行，始于足下。
 
 #### 软件架构
-软件架构说明
 
+|K|desc|version|
+|---|---|---|
+|jar-util|各种jar的使用demo||
+|java8-new-feature|java8新特性demo|java8|
+|learn-react|react学习demo|16.12.0|
+|cloud-parent|spring cloud学习demo|spring boot 2.1.10.RELEASE <br/> spring cloud Greenwich.SR4|
+|ce4j|基于java.lang.Runtime封装的用于简化java调用命令行的工具||
+|house|interceptor学习|spring boot 2.2.1.RELEASE|
 
 #### 安装教程
 
@@ -22,7 +29,7 @@
 #### 参与贡献
 
 1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
+2.  新建 feature_username_xxx 分支
 3.  提交代码
 4.  新建 Pull Request
 
