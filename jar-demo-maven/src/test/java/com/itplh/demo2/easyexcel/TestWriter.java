@@ -100,6 +100,48 @@ public class TestWriter {
     }
 
     /**
+     * @description: 分批次写数据
+     * 写入大数据量时，可能会有OOM的隐患，所以使用分页查询，分批写数据
+     * 1、获取总数据量 totalCount
+     * 2、获取总sheet数 sheetCount
+     * 3、分批写入数据
+     * 4、释放资源
+     * @author: tanpeng
+     * @date : 2020-02-28 10:30
+     * @version: v1.0.0
+     */
+    @Test
+    public void batchWrite() {
+
+        long totalCount = 120L;
+
+        // load data limit 10
+        int currentPage = 0;
+        final int pageSize = 10;
+        final long pageCount = (totalCount - 1) / pageSize + 1;
+        // one sheet limit 100
+        final int sheetMaxSize = 100;
+        final long sheetCount = (totalCount - 1) / sheetMaxSize + 1;
+
+        // build ExcelWriter
+        ExcelWriter excelWriter = EasyExcel.write(TestFileUtil.createNewFile(FILE_NAME_XLSX), WriteData.class).excelType(ExcelTypeEnum.XLSX).build();
+        WriteSheet sheet = null;
+        for (int i = 0; i < sheetCount; i++) {
+            sheet = EasyExcel.writerSheet(i, "清单" + i).build();
+            for (int j = 0; j < sheetMaxSize / pageSize; j++) {
+                currentPage++;
+                excelWriter.write(data(), sheet);
+                if (currentPage >= pageCount) {
+                    break;
+                }
+            }
+        }
+
+        // release source
+        excelWriter.finish();
+    }
+
+    /**
      * @description: 生成模拟数据
      * @author: tanpeng
      * @date : 2020-02-07 14:40
