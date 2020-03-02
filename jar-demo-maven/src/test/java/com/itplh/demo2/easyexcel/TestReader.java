@@ -12,6 +12,7 @@ import com.itplh.demo2.easyexcel.converter.CustomDisabledConverter;
 import com.itplh.demo2.easyexcel.converter.CustomTitleConverter;
 import com.itplh.demo2.easyexcel.listener.ConverterDataListener;
 import com.itplh.demo2.easyexcel.listener.ObjectListener;
+import com.itplh.demo2.easyexcel.listener.PerformanceListener;
 import com.itplh.demo2.easyexcel.listener.ReaderDataListener;
 import com.itplh.demo2.easyexcel.read.ConverterData;
 import com.itplh.demo2.easyexcel.read.ReaderData;
@@ -163,6 +164,22 @@ public class TestReader {
                 .doRead();
         System.out.println(readerDataListener.getList().stream().count());
         readerDataListener.getList().stream().forEach(System.out::println);
+    }
+
+    /**
+     * @description: 读取31M(46W行25列)的Excel，性能测试
+     * -Xms64m  -Xmx64m  70560ms
+     * -Xms128m -Xmx128m 65475ms
+     * -Xms512m -Xmx512m 65364ms
+     * @author: tanpeng
+     * @date : 2020-03-02 21:35
+     * @version: v1.0.0
+     */
+    @Test
+    public void readPerformance() {
+        EasyExcel.read(TestFileUtil.readFile(FILE_NAME_XLSX), new PerformanceListener())
+                .sheet()
+                .doRead();
     }
 
 }
