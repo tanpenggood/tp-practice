@@ -100,45 +100,72 @@ public class TestWriter {
     }
 
     /**
-     * @description: 分批次写数据
+     * @description: 分页查询、分批写数据
+     * @author: tanpeng
+     * @date : 2020-02-28 10:30
+     * @version: v1.0.0
+     */
+    @Test
+    public void pageWrite() {
+        // build ExcelWriter
+        ExcelWriter excelWriter = EasyExcel.write(TestFileUtil.createNewFile(FILE_NAME_XLSX), WriteData.class).excelType(ExcelTypeEnum.XLSX).build();
+        long totalCount = 1200_000L;
+        pageWrite(excelWriter, "清单", totalCount,
+                (current, size) -> data());
+    }
+
+    /**
+     * @description: 分页查询、分批写数据
      * 写入大数据量时，可能会有OOM的隐患，所以使用分页查询，分批写数据
      * 1、获取总数据量 totalCount
      * 2、获取总sheet数 sheetCount
      * 3、分批写入数据
      * 4、释放资源
      * @author: tanpeng
-     * @date : 2020-02-28 10:30
+     * @date : 2020-03-02 21:27
      * @version: v1.0.0
      */
-    @Test
-    public void batchWrite() {
+    private void pageWrite(ExcelWriter excelWriter,
+                           String sheetName,
+                           long totalCount,
+                           PageQuery pageQuery) {
+        // default export xlsx, page size 10000, sheet max row 1000000
+        int pageSize = 10_000;
+        int sheetMaxRow = 1_000_000;
 
-        long totalCount = 120L;
+        ExcelTypeEnum excelType = excelWriter.writeContext().writeWorkbookHolder().getExcelType();
+        boolean isXls =  excelType != null && ExcelTypeEnum.XLS.getValue().equals(excelType.getValue());
+        if (isXls) {
+            // export xls, page size 10000, sheet max row 70000
+            pageSize = 10_000;
+            sheetMaxRow = 70_000;
+        }
 
-        // load data limit 10
+        // compute page count, sheet count
+        long pageCount = (totalCount - 1) / pageSize + 1;
+        long sheetCount = (totalCount - 1) / sheetMaxRow + 1;
         int currentPage = 0;
-        final int pageSize = 10;
-        final long pageCount = (totalCount - 1) / pageSize + 1;
-        // one sheet limit 100
-        final int sheetMaxSize = 100;
-        final long sheetCount = (totalCount - 1) / sheetMaxSize + 1;
 
-        // build ExcelWriter
-        ExcelWriter excelWriter = EasyExcel.write(TestFileUtil.createNewFile(FILE_NAME_XLSX), WriteData.class).excelType(ExcelTypeEnum.XLSX).build();
+        // page write data
         WriteSheet sheet = null;
         for (int i = 0; i < sheetCount; i++) {
-            sheet = EasyExcel.writerSheet(i, "清单" + i).build();
-            for (int j = 0; j < sheetMaxSize / pageSize; j++) {
-                currentPage++;
-                excelWriter.write(data(), sheet);
+            sheet = EasyExcel.writerSheet(i, sheetName + i).build();
+            for (int j = 0; j < (sheetMaxRow / pageSize); j++) {
+                // must use ++currentPage
+                excelWriter.write(pageQuery.data(++currentPage, pageSize), sheet);
                 if (currentPage >= pageCount) {
                     break;
                 }
             }
         }
 
-        // release source
+        // close source
         excelWriter.finish();
+    }
+
+    @FunctionalInterface
+    interface PageQuery {
+        List data(int current, int size);
     }
 
     /**
