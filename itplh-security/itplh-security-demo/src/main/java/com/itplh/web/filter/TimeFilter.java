@@ -1,5 +1,7 @@
 package com.itplh.web.filter;
 
+import lombok.extern.slf4j.Slf4j;
+
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -14,23 +16,24 @@ import java.io.IOException;
  * @date: 2020-03-20 09:02
  * @version: v1.0.0
  */
+@Slf4j
 public class TimeFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        System.out.println("time filter init");
+        log.info("time filter init");
     }
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        System.out.println("time filter start");
+        log.info("time filter start");
         long start = System.currentTimeMillis();
         chain.doFilter(request, response);
-        System.out.println("time filter 耗时: "+ (System.currentTimeMillis() - start));
-        System.out.println("time filter finish");
+        log.info("time filter 耗时: {}", System.currentTimeMillis() - start);
+        log.info("time filter finish");
     }
 
     @Override
     public void destroy() {
-        System.out.println("time filter destroy");
+        log.info("time filter destroy");
     }
 }

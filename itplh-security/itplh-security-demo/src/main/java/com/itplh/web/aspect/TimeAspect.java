@@ -1,5 +1,6 @@
 package com.itplh.web.aspect;
 
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -21,16 +22,17 @@ import java.util.stream.Stream;
  */
 @Aspect
 @Component
+@Slf4j
 public class TimeAspect {
 
     @Around("execution(public * com.itplh.web.controller.*Controller.*(..))")
     public Object handleControllerMethod(ProceedingJoinPoint point) throws Throwable {
-        System.out.println("time aspect start");
-        Stream.of(point.getArgs()).forEach(arg -> System.out.println("arg is: " + arg));
+        log.info("time aspect start");
+        Stream.of(point.getArgs()).forEach(arg -> log.info("arg is: {}", arg));
         long start = System.currentTimeMillis();
         Object result = point.proceed();
-        System.out.println("time aspect 耗时: " + (System.currentTimeMillis() - start));
-        System.out.println("time aspect end");
+        log.info("time aspect 耗时: " + (System.currentTimeMillis() - start));
+        log.info("time aspect end");
         return result;
     }
 
