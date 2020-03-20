@@ -23,7 +23,7 @@ import java.util.stream.Stream;
 @Component
 public class TimeAspect {
 
-    @Around("execution(public * com.itplh.web.controller.UserController.*(..))")
+    @Around("execution(public * com.itplh.web.controller.*Controller.*(..))")
     public Object handleControllerMethod(ProceedingJoinPoint point) throws Throwable {
         System.out.println("time aspect start");
         Stream.of(point.getArgs()).forEach(arg -> System.out.println("arg is: " + arg));
