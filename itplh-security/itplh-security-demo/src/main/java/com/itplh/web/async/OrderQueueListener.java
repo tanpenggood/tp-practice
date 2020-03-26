@@ -24,6 +24,9 @@ public class OrderQueueListener implements ApplicationListener<ContextRefreshedE
     @Autowired
     private DeferredResultHolder deferredResultHolder;
 
+    @Autowired
+    private OrderApiInfo orderApiInfo;
+
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         new Thread(() -> {
@@ -32,7 +35,7 @@ public class OrderQueueListener implements ApplicationListener<ContextRefreshedE
                     String orderNumber = orderQueue.getPlaceOrderQueue().take();
                     log.info("开始处理订单，" + orderNumber);
                     TimeUnit.SECONDS.sleep(1);
-                    deferredResultHolder.getCompleteOrder().get(orderNumber).setResult(new OrderApiInfo().getOrderApiMap());
+                    deferredResultHolder.getCompleteOrder().get(orderNumber).setResult(orderApiInfo.getOrderApiMap());
                     log.info("订单处理完毕，" + orderNumber);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
