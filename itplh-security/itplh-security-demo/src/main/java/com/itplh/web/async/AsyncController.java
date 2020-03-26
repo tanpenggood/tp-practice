@@ -7,10 +7,12 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.async.DeferredResult;
+import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
 
 import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -23,6 +25,9 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class AsyncController {
 
+    @Autowired
+    private OrderApiInfo orderApiInfo;
+
     /**
      * 同步接口
      */
@@ -32,7 +37,7 @@ public class AsyncController {
         log.info("主线程开始");
         TimeUnit.SECONDS.sleep(1);
         log.info("主线程结束");
-        return new OrderApiInfo().getOrderApiMap();
+        return orderApiInfo.getOrderApiMap();
     }
 
     /**
@@ -47,12 +52,29 @@ public class AsyncController {
             log.info("副线程开始");
             TimeUnit.SECONDS.sleep(1);
             log.info("副线程结束");
-            return new OrderApiInfo().getOrderApiMap();
+            return orderApiInfo.getOrderApiMap();
         };
         Map result = callable.call();
 
         log.info("主线程结束");
         return result;
+    }
+
+    /**
+     * 异步接口
+     * 返回值为Callable
+     * 异步接口返回值处理，{@link HandlerMethodReturnValueHandler} 的实现类
+     */
+    @GetMapping("/order/callable-async")
+    public Callable<Map> asyncCallableOrder() {
+        log.info("async callable");
+        log.info("主线程开始");
+        return () -> {
+            log.info("副线程开始");
+            TimeUnit.SECONDS.sleep(1);
+            log.info("副线程结束");
+            return orderApiInfo.getOrderApiMap();
+        };
     }
 
     @Autowired
@@ -63,10 +85,12 @@ public class AsyncController {
 
     /**
      * 异步接口
+     * 返回值为DeferredResult
+     * 异步接口返回值处理，{@link HandlerMethodReturnValueHandler} 的实现类
      */
-    @GetMapping("/order/deferred_result")
+    @GetMapping("/order/deferred-result")
     public DeferredResult<Map> orderDeferredResult() throws Exception {
-        log.info("async deferred result + thread");
+        log.info("async deferred result");
         log.info("主线程开始");
 
         String orderNumber = RandomStringUtils.randomNumeric(8);
@@ -85,9 +109,9 @@ public class AsyncController {
     /**
      * 异步接口
      */
-    @GetMapping("/order/deferred_result/thread_pool")
+    @GetMapping("/order/deferred-result/thread-pool")
     public DeferredResult<Map> orderThreadPool() {
-        log.info("async deferred result + thread pool");
+        log.info("async deferred-result + thread-pool");
         log.info("主线程开始");
 
         DeferredResult<Map> result = new DeferredResult<>();
@@ -99,11 +123,48 @@ public class AsyncController {
                 e.printStackTrace();
             }
             log.info("副线程结束");
-            return new OrderApiInfo().getOrderApiMap();
+            return orderApiInfo.getOrderApiMap();
         }, threadPoolTaskExecutor)
                 .thenAccept(res -> result.setResult(res));
 
         log.info("主线程结束");
         return result;
+    }
+
+    /**
+     * 异步接口
+     * 返回值为CompletionStage
+     * 异步接口返回值处理，{@link HandlerMethodReturnValueHandler} 的实现类
+     */
+    @GetMapping("/order/completion-stage")
+    public CompletionStage<Map> completionStageOrder() {
+        log.info("async completion-stage");
+        log.info("主线程开始");
+        return CompletableFuture.supplyAsync(() -> {
+            log.info("副线程开始");
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            log.info("副线程结束");
+            return orderApiInfo.getOrderApiMap();
+        });
+    }
+
+    @GetMapping("/order/completion-stage/thread-pool")
+    public CompletionStage<Map> completionStageAndThreadPoolOrder() {
+        log.info("async completion-stage + thread pool");
+        log.info("主线程开始");
+        return CompletableFuture.supplyAsync(() -> {
+            log.info("副线程开始");
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            log.info("副线程结束");
+            return orderApiInfo.getOrderApiMap();
+        }, threadPoolTaskExecutor);
     }
 }
