@@ -28,15 +28,18 @@ public class SsoAuthorizationServerConfig extends AuthorizationServerConfigurerA
                 .secret("itplh-client-secret1")
                 .authorizedGrantTypes("authorization_code", "refresh_token")
                 // error="invalid_request", error_description="At least one redirect_uri must be registered with the client."
-                .redirectUris("http://localhost:8081/client1/login")
+                .redirectUris("http://client1.itplh.com:8081/login")
                 .scopes("all")
+                // 自动授权
+                .autoApprove(true)
             .and()
                 .withClient("itplh-client2")
                 .secret("itplh-client-secret2")
                 .authorizedGrantTypes("authorization_code", "refresh_token")
                 // error="invalid_request", error_description="At least one redirect_uri must be registered with the client."
-                .redirectUris("http://localhost:8082/client2/login")
-                .scopes("all");
+                .redirectUris("http://client2.itplh.com:8082/login")
+                .scopes("all")
+                .autoApprove(true);
     }
 
     @Override

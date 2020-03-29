@@ -3,12 +3,11 @@ security:
     client:
       client-id: itplh-client1
       client-secret: itplh-client-secret1
-      user-authorization-uri: http://127.0.0.1:8888/sso-server/oauth/authorize
-      access-token-uri: http://127.0.0.1:8888/sso-server/oauth/token
+      user-authorization-uri: http://sso.itplh.com:8888/oauth/authorize
+      access-token-uri: http://sso.itplh.com:8888/oauth/token
     resource:
       jwt:
-        key-uri: http://127.0.0.1:8888/sso-server/oauth/token_key
+        key-uri: http://sso.itplh.com:8888/oauth/token_key
 
 server:
   port: 8081
-  context-path: /client1
