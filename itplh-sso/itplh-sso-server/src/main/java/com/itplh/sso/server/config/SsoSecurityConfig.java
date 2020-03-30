@@ -24,7 +24,6 @@ public class SsoSecurityConfig extends WebSecurityConfigurerAdapter {
         http.formLogin()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/oauth/confirm_access").permitAll()
                 .anyRequest()
                 .authenticated();
     }
@@ -41,6 +40,5 @@ public class SsoSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
-
 
 }
