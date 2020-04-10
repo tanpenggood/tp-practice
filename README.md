@@ -15,6 +15,7 @@
 | jar-demo-maven            | 各种jar的使用demo                           |                                          |
 | java8-new-feature         | java8新特性demo                           | java8                                    |
 | learn-react               | react学习demo                            | 16.12.0                                  |
+| learn-spring-boot         | 学习使用spring boot                      | spring boot 2.1.13.RELEASE               |
 | **准备中...**                |                                        |                                          |
 | learn-spi                 | java的spi思想                             |                                          |
 | my-spring-boot-starter    | 自定义spring-boot起步依赖                     |                                          |
