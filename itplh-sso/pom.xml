@@ -6,9 +6,8 @@
     <artifactId>itplh-sso</artifactId>
     <version>1.0.0</version>
     <modules>
-        <module>itplh-sso-server</module>
-        <module>itplh-sso-client1</module>
-        <module>itplh-sso-client2</module>
+        <module>itplh-sso-dependence-1x</module>
+        <module>itplh-sso-dependence-2x</module>
     </modules>
     <packaging>pom</packaging>
     <name>itplh-sso</name>
@@ -18,44 +17,6 @@
         <java.version>1.8</java.version>
         <itplh.sso.version>1.0.0</itplh.sso.version>
     </properties>
-
-    <!--<dependencyManagement>-->
-        <!--<dependencies>-->
-            <!--<dependency>-->
-                <!--<groupId>org.springframework.boot</groupId>-->
-                <!--<artifactId>spring-boot-dependencies</artifactId>-->
-                <!--<version>2.1.13.RELEASE</version>-->
-                <!--<type>pom</type>-->
-                <!--<scope>import</scope>-->
-            <!--</dependency>-->
-            <!--<dependency>-->
-                <!--<groupId>org.springframework.cloud</groupId>-->
-                <!--<artifactId>spring-cloud-dependencies</artifactId>-->
-                <!--<version>Greenwich.SR5</version>-->
-                <!--<type>pom</type>-->
-                <!--<scope>import</scope>-->
-            <!--</dependency>-->
-        <!--</dependencies>-->
-    <!--</dependencyManagement>-->
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>io.spring.platform</groupId>
-                <artifactId>platform-bom</artifactId>
-                <version>Brussels-SR17</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>Dalston.SR2</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
     <build>
         <plugins>
