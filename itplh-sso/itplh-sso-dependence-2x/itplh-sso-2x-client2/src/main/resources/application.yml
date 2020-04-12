@@ -1,0 +1,13 @@
+security:
+  oauth2:
+    client:
+      client-id: itplh-client2-2x
+      client-secret: itplh-client-secret2-2x
+      user-authorization-uri: http://sso.itplh.com:9999/oauth/authorize
+      access-token-uri: http://sso.itplh.com:9999/oauth/token
+    resource:
+      jwt:
+        key-uri: http://sso.itplh.com:9999/oauth/token_key
+
+server:
+  port: 9092
