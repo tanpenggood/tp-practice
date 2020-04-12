@@ -9,7 +9,13 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>itplh-sso-server</artifactId>
+    <artifactId>itplh-sso-dependence-1x</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>itplh-sso-server</module>
+        <module>itplh-sso-client1</module>
+        <module>itplh-sso-client2</module>
+    </modules>
 
     <dependencies>
         <dependency>
@@ -29,5 +35,24 @@
             <artifactId>spring-security-jwt</artifactId>
         </dependency>
     </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.spring.platform</groupId>
+                <artifactId>platform-bom</artifactId>
+                <version>Brussels-SR17</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Dalston.SR2</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 </project>

@@ -8,9 +8,10 @@
 
 ## 项目简介
 
-- itplh-sso-server 认证服务器
-- itplh-sso-client1 客户端1
-- itplh-sso-client2 客户端2
+- itplh-sso-dependence-1x
+    - itplh-sso-server 认证服务器
+    - itplh-sso-client1 客户端1
+    - itplh-sso-client2 客户端2
 
 ## 快速开始
 
