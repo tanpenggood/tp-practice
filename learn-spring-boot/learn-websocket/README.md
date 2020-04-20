@@ -1,4 +1,4 @@
-## learn-websocket
+# learn-websocket
 
 > spring boot 整合 websocket 打造在线聊天室
 
@@ -21,6 +21,30 @@
 
 1. 启动`com.itplh.WebSocketApplication`
 2. 访问 `http://localhost:9999`
+
+## 项目依赖
+
+```xml
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-websocket</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-thymeleaf</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>fastjson</artifactId>
+        <version>1.2.62</version>
+    </dependency>
+    <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+    </dependency>
+</dependencies>
+```
 
 ## 参考
 
