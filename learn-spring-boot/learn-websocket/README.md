@@ -1,4 +1,4 @@
-## my-spring-boot-starter
+## learn-websocket
 
 > spring boot 整合 websocket 打造在线聊天室
 
