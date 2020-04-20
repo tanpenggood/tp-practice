@@ -6,8 +6,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
+import java.net.InetAddress;
 import java.net.URLEncoder;
+import java.net.UnknownHostException;
 
 /**
  * @description:
@@ -24,13 +27,15 @@ public class PageController {
     }
 
     @GetMapping(value = "/index")
-    public ModelAndView index(@RequestParam(value = "username") String username) throws UnsupportedEncodingException {
+    public ModelAndView index(@RequestParam(value = "username") String username,
+                              HttpServletRequest request) throws UnsupportedEncodingException, UnknownHostException {
         if (StringUtils.isEmpty(username)) {
             username = "匿名用户";
         }
         ModelAndView index = new ModelAndView("index");
         index.addObject("username", username);
-        index.addObject("webSocketUrl", "ws://localhost:9999/chat/" + URLEncoder.encode(username, "UTF-8"));
+        String webSocketUrl = String.format("ws://%s:%s/chat/%s", InetAddress.getLocalHost().getHostAddress(), request.getServerPort(), URLEncoder.encode(username, "UTF-8"));
+        index.addObject("webSocketUrl", webSocketUrl);
         return index;
     }
 
