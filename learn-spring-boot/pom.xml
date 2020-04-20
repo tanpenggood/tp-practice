@@ -9,6 +9,7 @@
     <version>1.0.0</version>
     <modules>
         <module>my-spring-boot-starter</module>
+        <module>learn-websocket</module>
     </modules>
     <packaging>pom</packaging>
 
