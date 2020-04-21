@@ -9,6 +9,7 @@
     <version>1.0.0</version>
     <modules>
         <module>review-thread</module>
+        <module>learn-nio</module>
     </modules>
     <packaging>pom</packaging>
 
