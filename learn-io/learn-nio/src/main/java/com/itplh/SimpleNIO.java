@@ -26,7 +26,7 @@ public class SimpleNIO {
         simpleNIO.write();
 
         simpleNIO.write(null, "\nhello 1", true);
-        simpleNIO.write(null, "\nhello 3",true);
+        simpleNIO.write(null, "\nhello 2",true);
 
         simpleNIO.write(new File("./nio-custom.txt"), null,false);
         simpleNIO.write(new File("./nio-custom.txt"), null,false);
@@ -34,10 +34,10 @@ public class SimpleNIO {
         simpleNIO.write(new File("./nio-custom.txt"), "\nhello custom file 2",true);
 
         simpleNIO.copyTxt(DEFAULT_FILE, new File("./nio-copy-txt1.txt"));
-        simpleNIO.copyTxt(new File("./nio-custom.txt") , new File("./nio-copy-txt3.txt"));
+        simpleNIO.copyTxt(new File("./nio-custom.txt") , new File("./nio-copy-txt2.txt"));
 
         simpleNIO.copy(DEFAULT_FILE, new File("./nio-copy1.txt"));
-        simpleNIO.copy(new File("./nio-custom.txt") , new File("./nio-copy3.txt"));
+        simpleNIO.copy(new File("./nio-custom.txt") , new File("./nio-copy2.txt"));
 
 //        simpleNIO.copyTxt(new File("./hd_x264.mp4") , new File("./copy-txt.mp4"));
 //        simpleNIO.copy(new File("./hd_x264.mp4") , new File("./copy.mp4"));
