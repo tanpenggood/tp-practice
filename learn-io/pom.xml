@@ -10,6 +10,7 @@
     <modules>
         <module>review-thread</module>
         <module>learn-nio</module>
+        <module>learn-bio</module>
     </modules>
     <packaging>pom</packaging>
 
