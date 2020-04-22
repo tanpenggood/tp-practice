@@ -8,15 +8,11 @@ import com.itplh.pojo.UserVO;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.BeanUtils;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -31,6 +27,20 @@ import java.util.List;
 @RestController
 @RequestMapping("/user")
 public class UserController {
+
+    /**
+     * @description: 获取当前用户
+     * 方式一 {@link SecurityContextHolder#getContext()#getAuthentication()}
+     * 方式二 Authentication user
+     * 方式三 @AuthenticationPrincipal UserDetails user
+     * @author: tanpeng
+     * @date : 2020/4/22 13:16
+     * @version: v1.0.0
+     */
+    @GetMapping("/me")
+    public Object getCurrentUser(@AuthenticationPrincipal UserDetails user) {
+        return user;
+    }
 
     @GetMapping
     @JsonView(UserVO.UserSimpleView.class)
