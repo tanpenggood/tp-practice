@@ -6,7 +6,7 @@ package com.itplh.security.core.properties;
  * @date : 2020/4/22 17:30
  * @version: v1.0.0
  */
-public enum LoginResponseType {
+public enum LoginResponseTypeEnum {
 
 	/**
 	 * 跳转

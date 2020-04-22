@@ -2,7 +2,7 @@ package com.itplh.security.browser.authentication;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itplh.security.browser.support.SimpleResponse;
-import com.itplh.security.core.properties.LoginResponseType;
+import com.itplh.security.core.properties.LoginResponseTypeEnum;
 import com.itplh.security.core.properties.SecurityProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +38,7 @@ public class ItplhAuthenticationFailureHandler extends SimpleUrlAuthenticationFa
 
 		logger.info("登录失败");
 
-		if (LoginResponseType.JSON.equals(securityProperties.getBrowser().getLoginType())) {
+		if (LoginResponseTypeEnum.JSON.equals(securityProperties.getBrowser().getLoginType())) {
 			response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
 			response.setContentType("application/json;charset=UTF-8");
 			response.getWriter().write(objectMapper.writeValueAsString(new SimpleResponse(exception.getMessage())));
