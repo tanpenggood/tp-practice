@@ -12,5 +12,6 @@ import lombok.Data;
 public class BrowserProperties {
 
     private String loginPage = "/sign-in.html";
+    private LoginResponseType loginType = LoginResponseType.JSON;
 
 }

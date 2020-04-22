@@ -1,5 +1,7 @@
 package com.itplh.security.browser;
 
+import com.itplh.security.browser.authentication.ItplhAuthenticationFailureHandler;
+import com.itplh.security.browser.authentication.ItplhAuthenticationSuccessHandler;
 import com.itplh.security.core.properties.SecurityProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -21,17 +23,27 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private SecurityProperties securityProperties;
 
+    @Autowired
+    private ItplhAuthenticationFailureHandler itplhAuthenticationFailureHandler;
+    @Autowired
+    private ItplhAuthenticationSuccessHandler itplhAuthenticationSuccessHandler;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
         http.formLogin()
 //                .loginPage("/sign-in.html") // 自定义登陆表单
                 .loginPage("/authentication/require") // 自定义用户认证逻辑
                 .loginProcessingUrl("/authentication/form")
+                .successHandler(itplhAuthenticationSuccessHandler) // 自定义成功处理器
+                .failureHandler(itplhAuthenticationFailureHandler) // 自定义失败处理器
 //        http.httpBasic()
             .and()
                 .authorizeRequests()
                 .antMatchers("/authentication/require",
-                        securityProperties.getBrowser().getLoginPage()).permitAll()
+                        securityProperties.getBrowser().getLoginPage(),
+                        "/code/image"
+                        ).permitAll()
                 .anyRequest()
                 .authenticated()
             .and().csrf().disable();
