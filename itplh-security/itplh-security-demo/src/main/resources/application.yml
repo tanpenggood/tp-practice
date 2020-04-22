@@ -31,6 +31,7 @@ spring:
 #      image:
 #        length: 6
 #        width: 100
+#        # 验证码拦截的接口配置（登录后验证码会从session移除，这里的逻辑还有待完善）
 #        url:
 #          - /user
 #          - /user/*
