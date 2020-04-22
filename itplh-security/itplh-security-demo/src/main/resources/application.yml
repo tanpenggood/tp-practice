@@ -26,6 +26,7 @@ spring:
 #       # 自定义登录页
 #      loginPage: /demo-sign-in.html
 #      loginType: REDIRECT
+#      rememberMeSeconds: 3600
 #    # 图片验证码相关
 #    code:
 #      image:
