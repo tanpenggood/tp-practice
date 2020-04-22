@@ -2,6 +2,7 @@ package com.itplh.security.core.properties;
 
 import lombok.Data;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -17,6 +18,6 @@ public class ImageCodeProperties {
     private int height = 23;
     private int length = 4;
     private int expireIn = 60;
-    private List<String> url;
+    private List<String> url = Collections.emptyList();
 
 }
