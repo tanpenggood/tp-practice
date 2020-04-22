@@ -3,6 +3,7 @@ package com.itplh.security.browser;
 import com.itplh.security.browser.authentication.ItplhAuthenticationFailureHandler;
 import com.itplh.security.browser.authentication.ItplhAuthenticationSuccessHandler;
 import com.itplh.security.core.properties.SecurityProperties;
+import com.itplh.security.core.validate.code.ValidateCodeFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,6 +11,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
  * @description:
@@ -30,8 +32,11 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        ValidateCodeFilter validateCodeFilter = new ValidateCodeFilter();
+        validateCodeFilter.setAuthenticationFailureHandler(itplhAuthenticationFailureHandler);
 
-        http.formLogin()
+        http.addFilterBefore(validateCodeFilter, UsernamePasswordAuthenticationFilter.class)
+                .formLogin()
 //                .loginPage("/sign-in.html") // 自定义登陆表单
                 .loginPage("/authentication/require") // 自定义用户认证逻辑
                 .loginProcessingUrl("/authentication/form")
