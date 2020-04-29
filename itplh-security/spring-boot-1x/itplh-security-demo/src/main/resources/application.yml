@@ -6,7 +6,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://local81:3306/itplh-security-demo?serverTimezone=GMT%2B8&characterEncoding=UTF-8&useUnicode=true&useSSL=false
     username: root
-    password: root
+    password: Cms@1234
 
   session:
     store-type: none
