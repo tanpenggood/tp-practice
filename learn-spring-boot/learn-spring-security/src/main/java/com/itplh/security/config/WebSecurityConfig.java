@@ -25,13 +25,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      * @date : 2020-04-29 23:35
      * @version: v1.0.0
      */
-    @Bean
-    public UserDetailsService userDetailsService() {
-        InMemoryUserDetailsManager userDetailsManager = new InMemoryUserDetailsManager();
-        userDetailsManager.createUser(User.withUsername("tanpeng").password("111").authorities("p1").build());
-        userDetailsManager.createUser(User.withUsername("huahua").password("222").authorities("p2").build());
-        return userDetailsManager;
-    }
+//    @Bean
+//    public UserDetailsService userDetailsService() {
+//        InMemoryUserDetailsManager userDetailsManager = new InMemoryUserDetailsManager();
+//        userDetailsManager.createUser(User.withUsername("tanpeng").password("111").authorities("p1").build());
+//        userDetailsManager.createUser(User.withUsername("huahua").password("222").authorities("p2").build());
+//        return userDetailsManager;
+//    }
 
     /**
      * @description: 密码编码器
