@@ -9,6 +9,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @description:
  * @author: tanpeng
@@ -23,10 +25,19 @@ public class MyUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        //登录账号
+        // 登录账号
         System.out.println("username= " + username);
-        //根据账号去数据库查询...
+        // 根据账号去数据库查询...
         UserDO user = userDao.getUserByUsername(username);
-        return user == null ? null : User.withUsername(user.getFullname()).password(user.getPassword()).authorities("p1").build();
+        if (user == null) {
+            return null;
+        }
+        // 查询用户权限
+        List<String> permissions = userDao.getPermissionsByUserId(user.getId());
+
+        return User.withUsername(user.getFullname())
+                .password(user.getPassword())
+                .authorities(permissions.toArray(new String[0]))
+                .build();
     }
 }

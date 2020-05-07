@@ -1,7 +1,7 @@
 package com.itplh.security.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class LoginSuccessController {
 
-    @PostMapping("/login-success")
+    @RequestMapping("/login-success")
     public ModelAndView success() {
         return new ModelAndView("login-success");
     }
