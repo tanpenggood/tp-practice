@@ -1,6 +1,7 @@
 package com.itplh.security.dao;
 
 import com.itplh.security.model.PermissionDO;
+import com.itplh.security.model.RoleDO;
 import com.itplh.security.model.UserDO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -34,6 +35,23 @@ public class UserDao {
     }
 
     /**
+     * @description: 根据用户id查询用户角色
+     * @author: tanpeng
+     * @date : 2020/5/7 11:35
+     * @version: v1.0.0
+     */
+    public List<String> getRolesByUserId(String userId) {
+        String sql = new StringBuilder()
+                .append("SELECT * FROM t_role WHERE id IN(")
+                    .append("SELECT role_id FROM t_user_role WHERE user_id = ?")
+                .append(")").toString();
+        List<RoleDO> list = jdbcTemplate.query(sql, new Object[]{userId}, new BeanPropertyRowMapper<>(RoleDO.class));
+        List<String> roles = new ArrayList<>();
+        list.forEach(c -> roles.add(c.getRoleName()));
+        return roles;
+    }
+
+    /**
      * @description: 根据用户id查询用户权限
      * @author: tanpeng
      * @date : 2020/5/7 10:12
@@ -49,7 +67,6 @@ public class UserDao {
         List<PermissionDO> list = jdbcTemplate.query(sql, new Object[]{userId}, new BeanPropertyRowMapper<>(PermissionDO.class));
         List<String> permissions = new ArrayList<>();
         list.forEach(c -> permissions.add(c.getCode()));
-
         return permissions;
     }
 
