@@ -15,14 +15,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/r")
 public class ResourceController {
 
-    @GetMapping("/p1")
-    public String p1(Authentication user) {
-        return user.getName() + " 访问需要认证的资源p1";
+    @GetMapping("/r1")
+    public String r1(Authentication user) {
+        return user.getName() + " 访问需要认证的资源r1";
     }
 
-    @GetMapping("/p2")
-    public String p2(Authentication user) {
-        return user.getName() + " 访问需要认证的资源p2";
+    @GetMapping("/r2")
+    public String r2(Authentication user) {
+        return user.getName() + " 访问需要认证的资源r2";
+    }
+
+    @GetMapping("/r3")
+    public String r3(Authentication user) {
+        return user.getName() + " 访问需要认证的资源r3";
     }
 
 }

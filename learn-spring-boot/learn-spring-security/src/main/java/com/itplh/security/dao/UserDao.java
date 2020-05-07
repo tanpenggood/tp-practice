@@ -1,5 +1,6 @@
 package com.itplh.security.dao;
 
+import com.itplh.security.model.PermissionDO;
 import com.itplh.security.model.UserDO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -7,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,6 +31,26 @@ public class UserDao {
         } else {
             return list.get(0);
         }
+    }
+
+    /**
+     * @description: 根据用户id查询用户权限
+     * @author: tanpeng
+     * @date : 2020/5/7 10:12
+     * @version: v1.0.0
+     */
+    public List<String> getPermissionsByUserId(String userId) {
+        String sql = new StringBuilder()
+                .append("SELECT * FROM t_permission WHERE id IN(")
+                    .append("SELECT permission_id FROM t_role_permission WHERE role_id IN(")
+                        .append("SELECT role_id FROM t_user_role WHERE user_id = ?")
+                    .append(")")
+                .append(")").toString();
+        List<PermissionDO> list = jdbcTemplate.query(sql, new Object[]{userId}, new BeanPropertyRowMapper<>(PermissionDO.class));
+        List<String> permissions = new ArrayList<>();
+        list.forEach(c -> permissions.add(c.getCode()));
+
+        return permissions;
     }
 
 }
