@@ -80,12 +80,12 @@ CREATE TABLE `t_user` (
   `fullname` varchar(255) CHARACTER SET utf8 NOT NULL COMMENT '用户姓名',
   `mobile` varchar(11) CHARACTER SET utf8 DEFAULT NULL COMMENT '手机号',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='用户表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='用户表';
 
 /*Data for the table `t_user` */
 
-insert  into `t_user`(`id`,`username`,`password`,`fullname`,`mobile`) values (1,'tanpeng','$2a$10$5vnRl0L6aVnh9XjCkL9H8.1Plf2rmCwNQqT8v9nqEWYvDyONXXNUe','谭鹏',NULL);
-insert  into `t_user`(`id`,`username`,`password`,`fullname`,`mobile`) values (2,'huahua','$2a$10$9Ggjsr.1tklwI0xVTeq64uX.opEWyVGO9GblCHcisoJbfy03nQeEe','花花',NULL);
+insert  into `t_user`(`id`,`username`,`password`,`fullname`,`mobile`) values (1,'su','$2a$10$5vnRl0L6aVnh9XjCkL9H8.1Plf2rmCwNQqT8v9nqEWYvDyONXXNUe','苏',NULL);
+insert  into `t_user`(`id`,`username`,`password`,`fullname`,`mobile`) values (2,'huan','$2a$10$9Ggjsr.1tklwI0xVTeq64uX.opEWyVGO9GblCHcisoJbfy03nQeEe','欢欢',NULL);
 
 /*Table structure for table `t_user_role` */
 
