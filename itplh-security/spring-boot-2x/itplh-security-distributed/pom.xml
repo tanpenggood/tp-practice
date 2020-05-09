@@ -13,7 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>itplh-security-distributed-uaa</module>
-        <module>itplh-security-distributed-order</module>
+        <module>itplh-security-distributed-user</module>
     </modules>
 
 </project>
