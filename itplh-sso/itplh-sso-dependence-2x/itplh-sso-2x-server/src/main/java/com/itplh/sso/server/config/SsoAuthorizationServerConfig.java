@@ -40,7 +40,7 @@ public class SsoAuthorizationServerConfig extends AuthorizationServerConfigurerA
                 .authorizedGrantTypes("authorization_code", "refresh_token")
                 // error="invalid_request", error_description="At least one redirect_uri must be registered with the client."
                 // must set context-path, otherwise too many redirects.
-                .redirectUris("http://client2.itplh.com:9092/login")
+                .redirectUris("http://client2.itplh.com:9092/login", "http://www.baidu.com")
                 .scopes("all")
                 .autoApprove(true);
     }
@@ -53,7 +53,7 @@ public class SsoAuthorizationServerConfig extends AuthorizationServerConfigurerA
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-        security.tokenKeyAccess("isAuthenticated()");
+        security.tokenKeyAccess("isAuthenticated()").allowFormAuthenticationForClients();
     }
 
     @Bean
