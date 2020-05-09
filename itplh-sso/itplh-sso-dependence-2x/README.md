@@ -22,6 +22,28 @@
     http://client1.itplh.com:9091
     http://client2.itplh.com:9092
     ```
+## Oauth2.0 授权码模式 应用场景之获取用户信息
+
+1. 获取code
+    ```
+    curl -X GET \
+      'http://sso.itplh.com:9999/oauth/authorize?client_id=itplh-client2-2x&response_type=code&scope=all&redirect_uri=http%3A%2F%2Fwww.baidu.com'
+    ```
+2. 登录并同意授权，从重定向地址上得到code
+3. 获取access_token
+    ```bash
+    curl -X POST \
+      http://localhost:9999/oauth/token \
+      -F client_id=itplh-client2-2x \
+      -F client_secret=itplh-client-secret2-2x \
+      -F grant_type=authorization_code \
+      -F redirect_uri=http://www.baidu.com \
+      -F code=Lyd7By
+    ```
+4. 携带access_token获取用户数据
+    ```
+    http://api.iptlh.com/user?access_token=''
+    ```
 
 ## 项目依赖
 
