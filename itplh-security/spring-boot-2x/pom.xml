@@ -11,6 +11,9 @@
 
     <artifactId>spring-boot-2x</artifactId>
     <packaging>pom</packaging>
+    <modules>
+        <module>itplh-security-distributed</module>
+    </modules>
 
     <dependencyManagement>
         <dependencies>
