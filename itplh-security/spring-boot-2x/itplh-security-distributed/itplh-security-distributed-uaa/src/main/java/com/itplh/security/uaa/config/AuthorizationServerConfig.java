@@ -40,7 +40,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         clients.inMemory()// 使用in‐memory存储
                 .withClient("c1")// client_id
                 .secret(new BCryptPasswordEncoder().encode("secret"))
-                .resourceIds("res1")
+                .resourceIds("user-center")
                 // 该client允许的授权类型authorization_code,password,refresh_token,implicit,client_credentials
                 .authorizedGrantTypes("authorization_code", "password", "client_credentials", "implicit", "refresh_token")
                 // 允许的授权范围
