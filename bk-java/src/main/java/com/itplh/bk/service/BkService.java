@@ -75,9 +75,23 @@ public class BkService {
             String maidian = li.child(0).attr("data-maidian");
             Element houseInfoDiv = li.child(1);
             HouseInfo houseInfo = getHouseInfo(maidian, houseInfoDiv);
-            System.out.println(houseInfo.toString());
-            houseInfoMapper.insert(houseInfo);
+            save2DB(houseInfo);
         });
+    }
+
+    /**
+     * 将房源信息保存到数据库
+     * @description:
+     * @author: tanpeng
+     * @date : 2020-05-11 23:58
+     * @version: v1.0.0
+     */
+    private void save2DB(HouseInfo houseInfo) {
+        try {
+            houseInfoMapper.insert(houseInfo);
+        } catch (Exception e) {
+            System.out.println("=====重复房源: title=" + houseInfo.getTitle() + ", href=" + houseInfo.getHref());
+        }
     }
 
     /**
@@ -114,9 +128,9 @@ public class BkService {
             faceToward = infoList.get(4);
         } else if (infoList.size() == 3) {
             String floorAndType = infoList.get(0);
-            int bracketsIndex = floorAndType.lastIndexOf(")");
-            floor = floorAndType.substring(0, bracketsIndex + 1);
-            type = floorAndType.substring(bracketsIndex + 1);
+            String[] floorAndTypeArray = floorAndType.split(" ");
+            floor = floorAndTypeArray[0];
+            type = floorAndTypeArray[1];
             size = infoList.get(1);
             faceToward = infoList.get(2);
         }
