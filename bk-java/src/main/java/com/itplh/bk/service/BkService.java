@@ -66,10 +66,13 @@ public class BkService {
         Element sellListContentUl = document.getElementsByClass("sellListContent").get(0);
         List<Element> clearLis = sellListContentUl.children().stream()
                 .filter(li -> li.hasClass("clear")).collect(Collectors.toList());
-        Elements houseInfoElements = new Elements();
-        clearLis.stream().forEach(li -> houseInfoElements.addAll(li.getElementsByClass("info")));
-        System.out.println("=====本页房源数: " + houseInfoElements.size());
-        houseInfoElements.stream().forEach(houseInfoDiv -> getHouseInfo(houseInfoDiv));
+        System.out.println("=====本页房源数: " + clearLis.size());
+        clearLis.stream().forEach(li -> {
+            String maidian = li.child(0).attr("data-maidian");
+            Element houseInfoDiv = li.child(1);
+            HouseInfo houseInfo = getHouseInfo(maidian, houseInfoDiv);
+            System.out.println(houseInfo.toString());
+        });
     }
 
     /**
@@ -79,7 +82,7 @@ public class BkService {
      * @date : 2020-05-11 00:18
      * @version: v1.0.0
      */
-    private HouseInfo getHouseInfo(Element houseInfoDiv) {
+    private HouseInfo getHouseInfo(String maidian, Element houseInfoDiv) {
         Element titleDiv = houseInfoDiv.child(0);
         Element titleA = titleDiv.child(0);
         String title = titleA.attr("title");
@@ -134,6 +137,7 @@ public class BkService {
         String unitPrice = priceInfoDiv.child(1).attr("data-price");
 
         HouseInfo houseInfo = HouseInfo.builder()
+                .maidian(maidian)
                 .title(title)
                 .href(href)
                 .neighbourhood(neighbourhood)
@@ -147,8 +151,6 @@ public class BkService {
                 .totalPrice(totalPrice)
                 .unitPrice(unitPrice)
                 .build();
-
-        System.out.println(houseInfo.toString());
         return houseInfo;
     }
 
