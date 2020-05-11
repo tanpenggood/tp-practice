@@ -90,7 +90,7 @@ public class BkService {
         try {
             houseInfoMapper.insert(houseInfo);
         } catch (Exception e) {
-            System.out.println("=====重复房源: title=" + houseInfo.getTitle() + ", href=" + houseInfo.getHref());
+            System.out.println("=====重复房源:" + houseInfo.toString());
         }
     }
 
