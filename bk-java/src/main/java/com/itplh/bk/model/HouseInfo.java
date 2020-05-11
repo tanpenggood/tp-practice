@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName("cq_ranjiaba_house_info")
+@TableName("house_info")
 public class HouseInfo {
 
     private String maidian;
