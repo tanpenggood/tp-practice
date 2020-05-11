@@ -1,12 +1,12 @@
 package com.itplh.bk.service;
 
 import com.alibaba.fastjson.JSON;
+import com.itplh.bk.mapper.HouseInfoMapper;
 import com.itplh.bk.model.HouseInfo;
 import com.itplh.bk.model.PageData;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
@@ -30,6 +30,9 @@ public class BkService {
     @Autowired
     private Environment environment;
 
+    @Autowired
+    private HouseInfoMapper houseInfoMapper;
+
     /**
      * 抓取贝壳房源信息
      * @description:
@@ -49,7 +52,7 @@ public class BkService {
     }
 
     /**
-     * 获取单页房源信息
+     * 抓取单页房源信息
      * @description:
      * @author: tanpeng
      * @date : 2020-05-11 02:58
@@ -72,11 +75,12 @@ public class BkService {
             Element houseInfoDiv = li.child(1);
             HouseInfo houseInfo = getHouseInfo(maidian, houseInfoDiv);
             System.out.println(houseInfo.toString());
+            houseInfoMapper.insert(houseInfo);
         });
     }
 
     /**
-     * 获取房源信息
+     * 构建房源信息对象
      * @description:
      * @author: tanpeng
      * @date : 2020-05-11 00:18
