@@ -1,6 +1,9 @@
 package com.itplh.bk.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @description:
@@ -9,6 +12,9 @@ import lombok.Data;
  * @version: v1.0.0
  */
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class PageData {
 
     private int totalPage;
