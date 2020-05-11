@@ -7,6 +7,7 @@ import com.itplh.bk.model.PageData;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
@@ -88,6 +89,10 @@ public class BkService {
      */
     private HouseInfo getHouseInfo(String maidian, Element houseInfoDiv) {
         Element titleDiv = houseInfoDiv.child(0);
+        Elements goodHouseSpan = titleDiv.getElementsByClass("goodhouse_tag");
+        String goodHouse = goodHouseSpan.isEmpty() ? "" : goodHouseSpan.text();
+        Elements newUpSpan = titleDiv.getElementsByClass("new");
+        String newUp = newUpSpan.isEmpty() ? "" : newUpSpan.text();
         Element titleA = titleDiv.child(0);
         String title = titleA.attr("title");
         String href = titleA.attr("href");
@@ -101,41 +106,25 @@ public class BkService {
         String type = "";
         String size = "";
         String faceToward = "";
-        // 防止报错下标越界
-        for (int i = 0; i < infoList.size(); i++) {
-            switch (i) {
-                case 0:
-                    floor = infoList.get(0);
-                    break;
-                case 1:
-                    buildYear = infoList.get(1);
-                    break;
-                case 2:
-                    type = infoList.get(2);
-                    break;
-                case 3:
-                    size = infoList.get(3);
-                    break;
-                case 4:
-                    faceToward = infoList.get(4);
-                    break;
-            }
+        if (infoList.size() == 5) {
+            floor = infoList.get(0);
+            buildYear = infoList.get(1);
+            type = infoList.get(2);
+            size = infoList.get(3);
+            faceToward = infoList.get(4);
+        } else if (infoList.size() == 3) {
+            String floorAndType = infoList.get(0);
+            int bracketsIndex = floorAndType.lastIndexOf(")");
+            floor = floorAndType.substring(0, bracketsIndex + 1);
+            type = floorAndType.substring(bracketsIndex + 1);
+            size = infoList.get(1);
+            faceToward = infoList.get(2);
         }
+
         List<String> followInfo = Arrays.asList(StringUtils.delimitedListToStringArray(addressDiv.child(2).text(), "/")).stream()
                 .map(info -> info.trim()).collect(Collectors.toList());
-        String focus = "";
-        String publishTime = "";
-        // 防止报错下标越界
-        for (int i = 0; i < followInfo.size(); i++) {
-            switch (i) {
-                case 0:
-                    focus = followInfo.get(0);
-                    break;
-                case 1:
-                    publishTime = followInfo.get(1);
-                    break;
-            }
-        }
+        String focus = followInfo.get(0);
+        String publishTime = followInfo.get(1);
         Element priceInfoDiv = addressDiv.child(4);
         String totalPrice = priceInfoDiv.child(0).child(0).text();
         String unitPrice = priceInfoDiv.child(1).attr("data-price");
@@ -154,6 +143,8 @@ public class BkService {
                 .publishTime(publishTime)
                 .totalPrice(totalPrice)
                 .unitPrice(unitPrice)
+                .goodHouse(goodHouse)
+                .newUp(newUp)
                 .build();
         return houseInfo;
     }

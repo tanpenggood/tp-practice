@@ -1,5 +1,6 @@
 package com.itplh.bk.model;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,6 +16,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@TableName("cq_ranjiaba_house_info")
 public class HouseInfo {
 
     private String maidian;
@@ -30,5 +32,7 @@ public class HouseInfo {
     private String publishTime;
     private String totalPrice;
     private String unitPrice;
+    private String goodHouse;
+    private String newUp;
 
 }
