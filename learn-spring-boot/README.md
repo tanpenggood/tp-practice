@@ -10,3 +10,4 @@
 |---|---|---|
 |my-spring-boot-starter|学习如何编写`spring-boot-starter-xxx`||
 |learn-websocket|spring boot 整合 websocket 打造在线聊天室||
+|learn-spring-security|Spring Security 实现细粒度权限认证(ABAC)||
