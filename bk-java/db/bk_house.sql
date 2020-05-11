@@ -18,5 +18,7 @@ CREATE TABLE `house_info` (
   `publish_time` varchar(64) DEFAULT NULL COMMENT '发布时间',
   `total_price` decimal(10,0) DEFAULT NULL COMMENT '总价',
   `unit_price` decimal(10,0) DEFAULT NULL COMMENT '单价',
+  `good_house` varchar(64) DEFAULT NULL COMMENT '必看好房',
+  `new_up` varchar(64) DEFAULT NULL COMMENT '新上房源',
   PRIMARY KEY (`maidian`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='在售房源信息';
