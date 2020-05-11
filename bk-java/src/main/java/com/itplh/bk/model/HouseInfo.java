@@ -17,6 +17,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class HouseInfo {
 
+    private String maidian;
     private String title;
     private String href;
     private String neighbourhood;
