@@ -11,6 +11,7 @@
         <module>my-spring-boot-starter</module>
         <module>learn-websocket</module>
         <module>learn-spring-security</module>
+        <module>my-enable-annotation</module>
     </modules>
     <packaging>pom</packaging>
 

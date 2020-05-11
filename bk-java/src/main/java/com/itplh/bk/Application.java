@@ -1,5 +1,6 @@
 package com.itplh.bk;
 
+import com.itplh.bk.properties.BkSpiderProperties;
 import com.itplh.bk.service.BkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -15,10 +16,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class Application implements CommandLineRunner {
 
-    private static final String URL = "https://cq.ke.com/ershoufang/nanan/";
-    private static final String DAN_ZI_SHI_INDEX = "https://cq.ke.com/ershoufang/danzishi/";
-    private static final String DAN_ZI_SHI_TEMPLATE = "https://cq.ke.com/ershoufang/danzishi/%s/";
-
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
@@ -26,9 +23,12 @@ public class Application implements CommandLineRunner {
     @Autowired
     private BkService bkService;
 
+    @Autowired
+    private BkSpiderProperties bkSpiderProperties;
+
     @Override
     public void run(String... args) throws Exception {
-        bkService.simpleSpider(DAN_ZI_SHI_INDEX, DAN_ZI_SHI_TEMPLATE);
+        bkService.simpleSpider(bkSpiderProperties.getIndexUrl(), bkSpiderProperties.getPageUrlTemplate());
     }
 
 }
