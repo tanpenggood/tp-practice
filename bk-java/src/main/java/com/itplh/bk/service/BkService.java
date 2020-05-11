@@ -7,6 +7,9 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -25,6 +28,9 @@ import java.util.stream.Collectors;
 @Service
 public class BkService {
 
+    @Autowired
+    private Environment environment;
+
     /**
      * 抓取贝壳房源信息
      * @description:
@@ -33,7 +39,7 @@ public class BkService {
      * @version: v1.0.0
      */
     public void simpleSpider(String indexUrl, String pageUrlTemplate) throws IOException {
-        int totalPage = getPageData(Jsoup.parse(new URL(indexUrl), 5000)).getTotalPage();
+        int totalPage = getPageData(indexUrl).getTotalPage();
         System.out.println("=====总页数: " + totalPage);
 
         String url;
@@ -149,14 +155,22 @@ public class BkService {
 
     /**
      * 获取分页数据
+     * dev环境只抓取首页数据
      * @description:
      * @author: tanpeng
      * @date : 2020-05-11 02:26
      * @version: v1.0.0
      */
-    private PageData getPageData(Document document) {
-        String pageDataString = document.getElementsByClass("house-lst-page-box").get(0).attr("page-data");
-        PageData pageData = JSON.parseObject(pageDataString, PageData.class);
+    private PageData getPageData(String indexUrl) throws IOException {
+        boolean isDevEnvironment = Arrays.asList(environment.getActiveProfiles()).stream().anyMatch(env -> "dev".equals(env));
+        PageData pageData;
+        if (isDevEnvironment) {
+            pageData = PageData.builder().curPage(1).totalPage(1).build();
+        } else {
+            Document document = Jsoup.parse(new URL(indexUrl), 5000);
+            String pageDataString = document.getElementsByClass("house-lst-page-box").get(0).attr("page-data");
+            pageData = JSON.parseObject(pageDataString, PageData.class);
+        }
         return pageData;
     }
 
