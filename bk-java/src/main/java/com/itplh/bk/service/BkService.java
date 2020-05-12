@@ -124,14 +124,13 @@ public class BkService {
             floor = infoList.get(0);
             buildYear = infoList.get(1);
             type = infoList.get(2);
-            size = infoList.get(3);
+            size = infoList.get(3).replace("平米", "");
             faceToward = infoList.get(4);
         } else if (infoList.size() == 3) {
-            String floorAndType = infoList.get(0);
-            String[] floorAndTypeArray = floorAndType.split(" ");
+            String[] floorAndTypeArray = infoList.get(0).split(" ");
             floor = floorAndTypeArray[0];
             type = floorAndTypeArray[1];
-            size = infoList.get(1);
+            size = infoList.get(1).replace("平米", "");
             faceToward = infoList.get(2);
         }
 
