@@ -16,6 +16,20 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "bk.spider")
 @EnableConfigurationProperties(BkSpiderProperties.class)
 public class BkSpiderProperties {
-    private String indexUrl;
-    private String pageUrlTemplate;
+    private String indexUrl = defaultIndexUrl();
+    private String pathParam = defaultPathParam();
+    private String pageUrlTemplate = defaultPageUrlTemplate();
+
+    private String defaultIndexUrl() {
+        return "https://cq.ke.com/ershoufang";
+    }
+
+    private String defaultPathParam() {
+        return "";
+    }
+
+    private String defaultPageUrlTemplate() {
+        return String.join("/", defaultIndexUrl(), "pg%s" + defaultPathParam());
+    }
+
 }

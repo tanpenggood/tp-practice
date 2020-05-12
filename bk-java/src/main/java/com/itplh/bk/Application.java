@@ -28,7 +28,8 @@ public class Application implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        bkService.simpleSpider(bkSpiderProperties.getIndexUrl(), bkSpiderProperties.getPageUrlTemplate());
+        bkService.simpleSpider(String.join("/", bkSpiderProperties.getIndexUrl(), bkSpiderProperties.getPathParam())
+                , bkSpiderProperties.getPageUrlTemplate());
     }
 
 }
