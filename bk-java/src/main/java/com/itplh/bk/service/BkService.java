@@ -136,7 +136,7 @@ public class BkService {
 
         List<String> followInfo = Arrays.asList(StringUtils.delimitedListToStringArray(addressDiv.child(2).text(), "/")).stream()
                 .map(info -> info.trim()).collect(Collectors.toList());
-        String focus = followInfo.get(0);
+        String focus = followInfo.get(0).replace("人关注", "");
         String publishTime = followInfo.get(1);
         Element priceInfoDiv = addressDiv.child(4);
         String totalPrice = priceInfoDiv.child(0).child(0).text();

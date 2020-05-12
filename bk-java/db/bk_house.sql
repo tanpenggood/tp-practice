@@ -14,7 +14,7 @@ CREATE TABLE `house_info` (
   `type` varchar(64) DEFAULT NULL COMMENT '户型',
   `size` decimal(10,2) DEFAULT NULL COMMENT '面积(平方)',
   `face_toward` varchar(64) DEFAULT NULL COMMENT '朝向',
-  `focus` varchar(64) DEFAULT NULL COMMENT '关注人数',
+  `focus` int(11) DEFAULT '0' COMMENT '关注人数',
   `publish_time` varchar(64) DEFAULT NULL COMMENT '发布时间',
   `total_price` decimal(10,2) DEFAULT NULL COMMENT '总价(万元)',
   `unit_price` decimal(10,2) DEFAULT NULL COMMENT '单价(元)',
