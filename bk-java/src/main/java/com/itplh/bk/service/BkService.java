@@ -40,14 +40,16 @@ public class BkService {
      * @author: tanpeng
      * @date : 2020-05-11 03:09
      * @version: v1.0.0
+     * @param targetUrl 目标链接(第一页)
+     * @param pageUrlTemplate 分页链接模板
      */
-    public void simpleSpider(String indexUrl, String pageUrlTemplate) throws IOException {
-        int totalPage = getPageData(indexUrl).getTotalPage();
+    public void simpleSpider(String targetUrl, String pageUrlTemplate) throws IOException {
+        int totalPage = getPageData(targetUrl).getTotalPage();
         System.out.println("=====总页数: " + totalPage);
 
         String url;
         for (int i = 1; i <= totalPage; i++) {
-            url =  i == 1 ? indexUrl : String.format(pageUrlTemplate, "pg" + i);
+            url =  i == 1 ? targetUrl : String.format(pageUrlTemplate, i);
             singlePageSpider(url);
         }
     }
@@ -170,13 +172,13 @@ public class BkService {
      * @date : 2020-05-11 02:26
      * @version: v1.0.0
      */
-    private PageData getPageData(String indexUrl) throws IOException {
+    private PageData getPageData(String targetUrl) throws IOException {
         boolean isDevEnvironment = Arrays.asList(environment.getActiveProfiles()).stream().anyMatch(env -> "dev".equals(env));
         PageData pageData;
         if (isDevEnvironment) {
             pageData = PageData.builder().curPage(1).totalPage(1).build();
         } else {
-            Document document = Jsoup.parse(new URL(indexUrl), 5000);
+            Document document = Jsoup.parse(new URL(targetUrl), 5000);
             String pageDataString = document.getElementsByClass("house-lst-page-box").get(0).attr("page-data");
             pageData = JSON.parseObject(pageDataString, PageData.class);
         }
