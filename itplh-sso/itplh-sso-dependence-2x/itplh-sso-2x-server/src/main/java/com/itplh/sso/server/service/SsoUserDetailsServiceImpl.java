@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
  * @date: 2020-03-29 20:58
  * @version: v1.0.0
  */
-@Service
+//@Service
 public class SsoUserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
