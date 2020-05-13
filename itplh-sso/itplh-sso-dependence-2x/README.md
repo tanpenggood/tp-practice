@@ -15,13 +15,17 @@
     127.0.0.1 client2.itplh.com
     ```
 
-2. 启动`itplh-sso-2x-server`
-3. 启动`itplh-sso-2x-client1` `itplh-sso-2x-client2`
-4. 访问
-    ```aidl
+2. 启动
+    - `itplh-sso-2x-server` 
+    - `itplh-sso-2x-client1` 
+    - `itplh-sso-2x-client2`
+3. 访问
+    ```
     http://client1.itplh.com:9091
     http://client2.itplh.com:9092
     ```
+4. 账号(密码) `su(111)` `huan(222)`
+
 ## Oauth2.0 授权码模式 应用场景之获取用户信息
 
 1. 获取code
