@@ -3,21 +3,16 @@ package com.itplh.juc.queue;
 import java.util.NoSuchElementException;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
 /**
- * @description:
+ * @description: 有界阻塞队列
  * @author: tanpeng
  * @date: 2020-05-17 22:45
  * @version: v1.0.0
  */
 public class TestBlockQueue {
-
-    ExecutorService provider = Executors.newSingleThreadExecutor();
-    ExecutorService consumer = Executors.newSingleThreadExecutor();
 
     public static void main(String[] args) {
         TestBlockQueue test = new TestBlockQueue();
