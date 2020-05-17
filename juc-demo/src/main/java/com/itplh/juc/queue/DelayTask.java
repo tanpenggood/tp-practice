@@ -1,4 +1,4 @@
-package com.itplh.juc.delayqueue;
+package com.itplh.juc.queue;
 
 import lombok.Getter;
 import lombok.Setter;
