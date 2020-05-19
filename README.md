@@ -15,6 +15,7 @@
 | itplh-sso                 | jwt + oauth2.0 实现单点登录               | spring boot 1.5.20.RELEASE <br/> spring cloud Dalston.SR2 <br/><br/> spring boot 2.1.13.RELEASE<br/>spring cloud Greenwich.SR5|
 | jar-demo-maven            | 各种jar的使用demo                           |                                          |
 | java8-new-feature         | java8新特性demo                           | java8                                    |
+| juc-demo                  | juc学习demo                          | java8                                    |
 | learn-io                  | 复习多线程<br/> 复习BIO<br/> 学习NIO<br/> 学习Netty<br/> 自定义RPC| java8|
 | learn-react               | react学习demo                            | 16.12.0                                  |
 | learn-spring-boot         | 学习使用spring boot <br/>1. 自定义spring-boot起步依赖 <br/>2. spring boot 整合 websocket 打造在线聊天室 <br/>3. Spring Security安全认证框架入门| spring boot 2.1.13.RELEASE|
