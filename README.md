@@ -14,7 +14,7 @@
 | itplh-security            | 学习 spring security <br/> OAuth2.0初探 <br/> 学习编写 REST 接口测试用例 <br/> 学习自定义 validator <br/> 学习自定义 filter <br/> 学习自定义 interceptor <br/> 自定义 aspect <br/> 学习 REST 接口多线程编程 <br/> Thread#start Thread#stop| spring boot 1.5.20.RELEASE <br/> spring cloud Dalston.SR2|
 | itplh-sso                 | jwt + oauth2.0 实现单点登录               | spring boot 1.5.20.RELEASE <br/> spring cloud Dalston.SR2 <br/><br/> spring boot 2.1.13.RELEASE<br/>spring cloud Greenwich.SR5|
 | jar-demo-maven            | 各种jar的使用demo                           |                                          |
-| java8-new-feature         | java8新特性demo                           | java8                                    |
+| java8-new-feature         | java8新特性demo                         | java8                                    |
 | juc-demo                  | juc学习demo                          | java8                                    |
 | learn-io                  | 复习多线程<br/> 复习BIO<br/> 学习NIO<br/> 学习Netty<br/> 自定义RPC| java8|
 | learn-react               | react学习demo                            | 16.12.0                                  |
