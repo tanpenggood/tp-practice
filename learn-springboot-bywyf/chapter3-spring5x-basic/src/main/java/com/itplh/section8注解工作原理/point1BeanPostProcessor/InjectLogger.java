@@ -1,4 +1,4 @@
-package com.itplh.section8;
+package com.itplh.section8注解工作原理.point1BeanPostProcessor;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

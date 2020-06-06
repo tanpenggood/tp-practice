@@ -1,4 +1,4 @@
-package com.itplh.section8;
+package com.itplh.section8注解工作原理.point1BeanPostProcessor;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
