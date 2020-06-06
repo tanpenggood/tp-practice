@@ -9,6 +9,7 @@
     <version>1.0.0</version>
     <modules>
         <module>chapter3-spring5x-basic</module>
+        <module>chapter4-深入SpringBoot</module>
     </modules>
     <packaging>pom</packaging>
     <description>学习《从企业级开发到云原生微服务：Spring Boot 实战》笔记</description>
