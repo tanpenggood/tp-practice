@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.PerformanceInterceptor;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
 /**
  * @author: tanpeng
@@ -20,6 +21,7 @@ public class MybatisPlusConfig {
     }
 
     @Bean
+    @Profile("dev")
     public PerformanceInterceptor performanceInterceptor() {
         return new PerformanceInterceptor();
     }
