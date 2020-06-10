@@ -1,44 +1,34 @@
 package com.itplh.modules.wxjssdk.controller;
 
-import com.itplh.common.Result;
-import com.itplh.common.util.IdWorker;
-import com.itplh.modules.wxjssdk.mapper.WxJsSdkMapper;
-import com.itplh.modules.wxjssdk.pojo.entity.WxJsSdk;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.itplh.modules.wxjssdk.pojo.ro.ConnectAuthRO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Date;
+import java.security.NoSuchAlgorithmException;
+import java.util.Objects;
 
 /**
  * @author: tanpeng
  * @since: 2020-06-10 13:18
  */
+@Slf4j
 @RestController
 @RequestMapping("/wx-js-sdk")
 public class WxJsSdkController {
 
-    @Autowired
-    private WxJsSdkMapper wxJsSdkMapper;
-    @Autowired
-    private IdWorker idWorker;
-
     @GetMapping
-    public Result get() {
-        WxJsSdk wxJsSdk = wxJsSdkMapper.selectById(1);
-        return Result.ok(wxJsSdk);
+    public String connectTest(ConnectAuthRO connectAuthRO) throws NoSuchAlgorithmException {
+        String signature = connectAuthRO.getSignature();
+        String hashcode = connectAuthRO.hashcodeBySha1();
+        log.info("signature: {}", signature);
+        log.info("hashcode: {}", hashcode);
+        log.info(connectAuthRO.toString());
+        if (Objects.equals(signature, hashcode)) {
+            return connectAuthRO.getEchostr();
+        }
+        return null;
     }
 
-    @GetMapping("insert")
-    public Result insert() {
-        long nextId = idWorker.nextId();
-        WxJsSdk wxJsSdk = new WxJsSdk();
-        wxJsSdk.setId(nextId);
-        wxJsSdk.setAccessToken("token" + nextId);
-        wxJsSdk.setTicket("ticket" + nextId);
-        wxJsSdk.setCreateTime(new Date());
-        wxJsSdkMapper.insert(wxJsSdk);
-        return Result.ok(wxJsSdk);
-    }
 }
