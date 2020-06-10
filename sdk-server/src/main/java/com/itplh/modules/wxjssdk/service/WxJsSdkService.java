@@ -13,7 +13,7 @@ public class WxJsSdkService {
     private RestTemplate restTemplate;
 
     public AccessTokenResponse getAccessToken() {
-        String accessTokenUrl = String.format(WxJsSdkEnum.ACCESS_TOKEN_URL_TEMPLDATE.getValue(),
+        String accessTokenUrl = String.format(WxJsSdkEnum.ACCESS_TOKEN_URL_TEMPLATE.getValue(),
                 WxJsSdkEnum.APPID.getValue(), WxJsSdkEnum.SECRET.getValue());
         AccessTokenResponse accessTokenResponse = restTemplate.getForEntity(accessTokenUrl, AccessTokenResponse.class).getBody();
         return accessTokenResponse;
