@@ -1,4 +1,4 @@
-package com.itplh.demo1;
+package com.itplh.thread.demo1;
 
 /**
  * @description: 线程安全

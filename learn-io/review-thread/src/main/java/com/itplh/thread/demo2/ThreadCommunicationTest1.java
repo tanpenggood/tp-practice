@@ -1,7 +1,6 @@
-package com.itplh.demo2;
+package com.itplh.thread.demo2;
 
-import com.itplh.demo1.ThreadSafe;
-import sun.jvm.hotspot.utilities.WorkerThread;
+import com.itplh.thread.demo1.ThreadSafe;
 
 import java.util.concurrent.TimeUnit;
 
