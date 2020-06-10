@@ -1,4 +1,4 @@
-package com.itplh;
+package com.itplh.bio;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;

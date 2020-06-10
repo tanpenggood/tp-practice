@@ -1,17 +1,18 @@
-package com.itplh.demo1;
+package com.itplh.thread.demo1;
+
 
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.LongAdder;
 
 /**
  * @description:
  * @author: tanpeng
- * @date: 2020-04-19 21:59
+ * @date: 2020-04-19 20:19
  * @version: v1.0.0
  */
-@ThreadUnsafe
-public class ThreadUnsafeTest {
-
-    public static volatile int count = 0;
+@ThreadSafe
+public class ThreadSafeTest {
+    public static volatile LongAdder count = new LongAdder();
     public static final int loop = 100;
 
     public static void main(String[] args) {
@@ -19,10 +20,10 @@ public class ThreadUnsafeTest {
         new Thread(() -> add(), "consumer2").start();
     }
 
-    @ThreadUnsafe
+    @ThreadSafe
     private static void add() {
         for (int i = 0; i < loop; i++) {
-            ++count;
+            count.increment();
             // 模拟计算耗时
             try {
                 TimeUnit.MILLISECONDS.sleep(10);
@@ -30,6 +31,6 @@ public class ThreadUnsafeTest {
                 e.printStackTrace();
             }
         }
-        System.out.println(String.format("%s %s", Thread.currentThread().getName(), count));
+        System.out.println(String.format("%s %s", Thread.currentThread().getName(), count.longValue()));
     }
 }
