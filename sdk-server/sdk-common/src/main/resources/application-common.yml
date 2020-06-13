@@ -4,6 +4,8 @@
 spring:
   # DataSource Config
   datasource:
+    # 每次启动程序，程序都会运行schema.sql文件，对数据库的数据操作
+    schema: classpath:db/schema.sql
     # 连接池配置
     type: com.zaxxer.hikari.HikariDataSource
     hikari:
