@@ -18,4 +18,9 @@ public class TestWxJsSdkService {
         System.out.println(wxJsSdkService.getAccessToken());
     }
 
+    @Test
+    public void getTicket() {
+        System.out.println(wxJsSdkService.getTicket());
+    }
+
 }
