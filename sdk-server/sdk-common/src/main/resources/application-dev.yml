@@ -13,13 +13,9 @@ spring:
   datasource:
     driver-class-name: org.h2.Driver
     # 配置h2数据库的连接地址
-    url: jdbc:h2:./data/sdk_db;AUTO_SERVER=TRUE;DB_CLOSE_DELAY=-1;MODE=MYSQL;
+    url: jdbc:h2:D:/code/tp-practice/sdk-server/data/sdk_db;AUTO_SERVER=TRUE;DB_CLOSE_DELAY=-1;MODE=MYSQL;
     username: itplh
     password: VB8yzXg4vsW8tGPU
-    # 每次启动程序，程序都会运行schema.sql文件，对数据库的数据操作
-    schema: classpath:db/schema.sql
-    # 每次启动程序，程序都会运行data.sql文件，对数据库的数据操作
-    data: classpath:db/data.sql
 
 # Mybatis Plus Config
 mybatis-plus:
