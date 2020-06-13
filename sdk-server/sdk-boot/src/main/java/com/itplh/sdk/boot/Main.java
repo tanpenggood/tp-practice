@@ -17,8 +17,13 @@ public class Main {
         String port = env.getProperty("server.port");
         System.out.println("##########################################################################");
         System.out.println("# SDK SERVER is running! Access URLs:");
-        System.out.printf("# Local: http://localhost:%s\n", port);
-        System.out.printf("# External: http://%s:%s\n", ip, port);
+        System.out.printf("Local: http://localhost:%s\n", port);
+        System.out.printf("External: http://%s:%s\n", ip, port);
+        System.out.println("\n# database about:");
+        System.out.printf("db url: %s\n", env.getProperty("spring.datasource.url"));
+        System.out.printf("db username: %s\n", env.getProperty("spring.datasource.username"));
+        System.out.printf("db password: %s\n", env.getProperty("spring.datasource.password"));
+        System.out.printf("H2 Console: http://localhost:%s%s\n", port, env.getProperty("spring.h2.console.path"));
         System.out.println("##########################################################################");
     }
 
