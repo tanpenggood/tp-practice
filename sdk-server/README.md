@@ -26,3 +26,11 @@ sdk-server     # 父工程(pom)
 - mybatis-plus 3.0.6
 - h2 1.4.200
 - lombok 1.18.12
+
+## Q&A
+
+1. `application.yml`、`db`等文件为什么要放在`sdk-common`模块？
+
+    是为了保证启动时数据库/表一定会存在。
+    
+    如，将配置文件放在`sdk-boot`模块，那么`wx-sdk`模块单测时，则找不到数据库/表。
