@@ -2,7 +2,7 @@
 # 生产环境
 ##########################################################
 server:
-  port: 80
+  port: 8758
 
 spring:
   # 引入通用配置
@@ -13,7 +13,7 @@ spring:
   datasource:
     driver-class-name: org.h2.Driver
     # 配置h2数据库的连接地址
-    url: jdbc:h2:./data/sdk_db;AUTO_SERVER=TRUE;DB_CLOSE_DELAY=-1;MODE=MYSQL;
+    url: jdbc:h2:/home/tanpeng/tp-code/sdk-server/data/sdk_db;AUTO_SERVER=TRUE;DB_CLOSE_DELAY=-1;MODE=MYSQL;
     username: itplh
     password: VB8yzXg4vsW8tGPU
 
