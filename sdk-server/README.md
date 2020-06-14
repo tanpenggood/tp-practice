@@ -19,6 +19,18 @@ sdk-server     # 父工程(pom)
 
 `com.itplh.sdk.boot.Main`
 
+**vm options**
+```
+-Xms512m -Xmx512m
+```
+
+**program arguments**
+```
+--weixin.jssdk.appid=xxx \
+--weixin.jssdk.secret=xxx \
+--weixin.jssdk.basic-config-token=xxx \
+```
+
 ## 技术架构
 
 - Java8
