@@ -6,6 +6,8 @@ import com.itplh.sdk.weixin.jssdk.pojo.ro.ConnectAuthRO;
 import com.itplh.sdk.weixin.jssdk.service.JsSdkService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Bean;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,6 +52,11 @@ public class JsSdkController {
             return Result.error();
         }
         return Result.ok(jsSdkService.getSignatureBO(url));
+    }
+
+    @Bean("com.itplh.sdk.weixin.jssdk.controller.JsSdkController.commandLineRunner")
+    CommandLineRunner commandLineRunner() {
+        return args -> log.info(jsSdkProperties.toString());
     }
 
 }
