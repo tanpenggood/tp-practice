@@ -10,6 +10,9 @@
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="format-detection" content="telephone=no">
+	<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.min.js"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.min.js"></script>
+	<script src="http://res2.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
 	<style type="text/css">
 		* {
 			margin: 0;
@@ -19,6 +22,7 @@
 			font-size: 22px;
 			background-color: rgba(255, 255, 255, 0.9);
 			display: flex;
+			flex-direction: column;
 			justify-content: center;
 			align-items: center;
 		}
@@ -34,6 +38,79 @@
 ███████║██████╔╝██║&nbsp;&nbsp;&nbsp;██╗<br/>
 ╚══════╝╚═════╝&nbsp;╚═╝&nbsp;&nbsp;&nbsp;╚═╝<br/>
 <br/>
+<div id="app">
+    <div><button @click="scanQRCode">扫描二维码</button></div>
+    <div><button @click="chooseImage">选择图片</button></div>
+    <div><button @click="updateAppMessageShareData">自定义“分享给朋友”及“分享到QQ”按钮的分享内容</button></div>
+</div>
 </div>
 </body>
+<script>
+	new Vue({
+		el: '#app',
+		created() {
+			const url = location.href
+			axios.get(`/wx-js-sdk/signature?url=${url}`).then(res => {
+				const response = res.data
+				if (response.success) {
+					const signatureVO = response.data
+					console.log(signatureVO)
+					this.config(signatureVO)
+				}
+			})
+		},
+		methods: {
+			config(signatureVO) {
+				wx.config({
+					debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+					...signatureVO,
+					nonceStr: signatureVO['noncestr'],
+					jsApiList: ['scanQRCode'] // 必填，需要使用的JS接口列表
+				});
+				wx.ready(function(){
+					// config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
+					console.log('config信息验证后会执行ready方法')
+				});
+				wx.error(function(res){
+					// config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
+					console.log('config信息验证失败会执行error函数')
+				});
+			},
+			scanQRCode() {
+				wx.scanQRCode({
+					needResult: 0, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
+					scanType: ["qrCode","barCode"], // 可以指定扫二维码还是一维码，默认二者都有
+					success: (res) => {
+						var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
+						console.log('result', result)
+					}
+				});
+			},
+			chooseImage() {
+				wx.chooseImage({
+					count: 1, // 默认9
+					sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+					sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+					success: function (res) {
+						var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+						console.log('localIds', localIds)
+					}
+				});
+			},
+			updateAppMessageShareData() {
+				wx.ready(function () {   //需在用户可能点击分享按钮前就先调用
+					wx.updateAppMessageShareData({
+						title: 'SDK Server', // 分享标题
+						desc: '这是我的SDK Server', // 分享描述
+						link: 'http://sdk.itplh.com', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+						imgUrl: '', // 分享图标
+						success: function () {
+							// 设置成功
+						}
+					})
+				});
+			}
+		}
+	})
+</script>
 </html>
