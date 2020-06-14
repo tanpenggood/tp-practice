@@ -8,12 +8,14 @@ start() {
       --weixin.jssdk.secret=xxx \
       --weixin.jssdk.basic-config-token=xxx \
       --spring.profiles.active=prod > ./$log_name 2>&1 &
+  echo "service start ok."
 }
 
 stop() {
   echo "service stop..."
   pid=`getPid`
   kill $pid
+  echo "service stop ok."
 }
 
 restart() {
