@@ -1,0 +1,8 @@
+##########################################################
+# 扩展-微信SDK配置
+##########################################################
+weixin:
+  jssdk:
+    appid: appid
+    secret: secret
+    basic-config-token: basic-config-token
