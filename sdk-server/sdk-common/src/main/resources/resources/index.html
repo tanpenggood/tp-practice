@@ -41,7 +41,7 @@
 <div id="app">
     <div><button @click="scanQRCode">扫描二维码</button></div>
     <div><button @click="chooseImage">选择图片</button></div>
-    <div><button @click="updateAppMessageShareData">自定义“分享给朋友”及“分享到QQ”按钮的分享内容</button></div>
+    <div><button @click="getLocation">获取地理位置</button></div>
 </div>
 </div>
 </body>
@@ -97,20 +97,25 @@
 					}
 				});
 			},
-			updateAppMessageShareData() {
-				wx.ready(function () {   //需在用户可能点击分享按钮前就先调用
-					wx.updateAppMessageShareData({
-						title: 'SDK Server', // 分享标题
-						desc: '这是我的SDK Server', // 分享描述
-						link: 'http://sdk.itplh.com', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-						imgUrl: '', // 分享图标
-						success: function () {
-							// 设置成功
-						}
-					})
-				});
-			},
-			jsApiList() {
+            getLocation() {
+                wx.getLocation({
+                    type: 'wgs84',
+                    success: function (res) {
+                        var latitude = res.latitude;
+                        var longitude = res.longitude;
+                        var speed = res.speed;
+
+                        wx.openLocation({
+                            latitude,
+                            longitude,
+                            name: '',
+                            address: '',
+                            scale: 14, // 1~28
+                        });
+                    }
+                });
+            },
+            jsApiList() {
 				return [
 					'updateAppMessageShareData',
 					'updateTimelineShareData',
