@@ -1,7 +1,7 @@
 package com.itplh.sdk.weixin.jssdk.mapper;
 
 import com.itplh.sdk.common.util.IdWorker;
-import com.itplh.sdk.weixin.jssdk.pojo.entity.JsSdk;
+import com.itplh.sdk.weixin.jssdk.pojo.entity.WeixinJsSdk;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,24 +12,24 @@ import java.util.Date;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class TestWxJsSdkMapper {
+public class TestWeixinJsSdkMapper {
 
     @Autowired
     private IdWorker idWorker;
 
     @Autowired
-    private JsSdkMapper wxJsSdkMapper;
+    private WeixinJsSdkMapper weixinJsSdkMapper;
 
     @Test
     public void insert() {
         long nextId = idWorker.nextId();
-        JsSdk wxJsSdk = new JsSdk();
-        wxJsSdk.setId(nextId);
-        wxJsSdk.setAccessToken("access_token" + nextId);
-        wxJsSdk.setTicket("ticket" + nextId);
-        wxJsSdk.setCreateTime(new Date());
-        wxJsSdkMapper.insert(wxJsSdk);
-        System.out.println(wxJsSdkMapper.selectById(nextId));
+        WeixinJsSdk weixinJsSdk = new WeixinJsSdk();
+        weixinJsSdk.setId(nextId);
+        weixinJsSdk.setAccessToken("access_token" + nextId);
+        weixinJsSdk.setTicket("ticket" + nextId);
+        weixinJsSdk.setCreateTime(new Date());
+        weixinJsSdkMapper.insert(weixinJsSdk);
+        System.out.println(weixinJsSdkMapper.selectById(nextId));
     }
 
 }
