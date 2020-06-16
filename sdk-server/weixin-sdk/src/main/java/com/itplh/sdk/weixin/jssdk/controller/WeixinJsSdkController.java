@@ -1,9 +1,9 @@
 package com.itplh.sdk.weixin.jssdk.controller;
 
 import com.itplh.sdk.common.Result;
-import com.itplh.sdk.weixin.jssdk.pojo.properties.JsSdkProperties;
+import com.itplh.sdk.weixin.jssdk.pojo.properties.WeixinJsSdkProperties;
 import com.itplh.sdk.weixin.jssdk.pojo.ro.ConnectAuthRO;
-import com.itplh.sdk.weixin.jssdk.service.JsSdkService;
+import com.itplh.sdk.weixin.jssdk.service.WeixinJsSdkService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -23,14 +23,14 @@ import java.util.Objects;
  */
 @Slf4j
 @RestController
-@RequestMapping("/wx-js-sdk")
-public class JsSdkController {
+@RequestMapping("/weixin/js-sdk")
+public class WeixinJsSdkController {
 
     @Autowired
-    private JsSdkService jsSdkService;
+    private WeixinJsSdkService jsSdkService;
 
     @Autowired
-    private JsSdkProperties jsSdkProperties;
+    private WeixinJsSdkProperties jsSdkProperties;
 
     @GetMapping
     public String connectAuth(@Valid ConnectAuthRO connectAuthRO) throws NoSuchAlgorithmException {

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Data
 @Component
 @ConfigurationProperties(prefix = "weixin.jssdk")
-public class JsSdkProperties {
+public class WeixinJsSdkProperties {
 
     /**
      * appid

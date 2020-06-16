@@ -4,13 +4,14 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.itplh.sdk.common.util.IdWorker;
 import com.itplh.sdk.common.util.SHAUtil;
-import com.itplh.sdk.weixin.jssdk.mapper.JsSdkMapper;
+import com.itplh.sdk.weixin.jssdk.mapper.WeixinJsSdkMapper;
 import com.itplh.sdk.weixin.jssdk.pojo.bo.SignatureBO;
-import com.itplh.sdk.weixin.jssdk.pojo.entity.JsSdk;
-import com.itplh.sdk.weixin.jssdk.pojo.properties.JsSdkProperties;
+import com.itplh.sdk.weixin.jssdk.pojo.entity.WeixinJsSdk;
+import com.itplh.sdk.weixin.jssdk.pojo.properties.WeixinJsSdkProperties;
 import com.itplh.sdk.weixin.jssdk.pojo.response.AccessTokenResponse;
 import com.itplh.sdk.weixin.jssdk.pojo.response.TicketResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -23,19 +24,19 @@ import java.util.*;
 
 @Slf4j
 @Service
-public class JsSdkService {
+public class WeixinJsSdkService {
 
     @Autowired
     private RestTemplate restTemplate;
 
     @Autowired
-    private JsSdkMapper jsSdkMapper;
+    private WeixinJsSdkMapper weixinJsSdkMapper;
 
     @Autowired
     private IdWorker idWorker;
 
     @Autowired
-    private JsSdkProperties jsSdkProperties;
+    private WeixinJsSdkProperties weixinJsSdkProperties;
 
     /**
      * 请求微信接口获取access_token
@@ -43,8 +44,8 @@ public class JsSdkService {
      * @return
      */
     public AccessTokenResponse getAccessToken() {
-        String accessTokenUrl = String.format(jsSdkProperties.getUrlTemplateAccessToken(),
-                jsSdkProperties.getAppid(), jsSdkProperties.getSecret());
+        String accessTokenUrl = String.format(weixinJsSdkProperties.getUrlTemplateAccessToken(),
+                weixinJsSdkProperties.getAppid(), weixinJsSdkProperties.getSecret());
         AccessTokenResponse accessTokenResponse = restTemplate.getForEntity(accessTokenUrl, AccessTokenResponse.class).getBody();
         log.info(accessTokenResponse.toString());
         Optional.ofNullable(accessTokenResponse.getAccess_token()).orElseThrow(() -> new RuntimeException("获取access_token失败，请检查相关配置"));
@@ -58,7 +59,7 @@ public class JsSdkService {
      */
     public TicketResponse getTicketResponse() {
         String accessToken = getAccessToken().getAccess_token();
-        String ticketUrl = String.format(jsSdkProperties.getUrlTemplateTicket(), accessToken);
+        String ticketUrl = String.format(weixinJsSdkProperties.getUrlTemplateTicket(), accessToken);
         TicketResponse ticketResponse = restTemplate.getForEntity(ticketUrl, TicketResponse.class).getBody();
         log.info(ticketResponse.toString());
         Optional.ofNullable(ticketResponse.getTicket()).orElseThrow(() -> new RuntimeException("获取ticket失败，请检查相关配置"));
@@ -72,26 +73,27 @@ public class JsSdkService {
      */
     public String getTicket() {
         String ticket = null;
-        IPage<JsSdk> page = jsSdkMapper.selectPage(new Page<>(1, 1), null);
-        JsSdk jsSdk = (page.getRecords().size() == 1) ? page.getRecords().get(0) : null;
-        if (jsSdk == null) {
+        IPage<WeixinJsSdk> page = weixinJsSdkMapper.selectPage(new Page<>(1, 1), null);
+        WeixinJsSdk weixinJsSdk = (page.getRecords().size() == 1) ? page.getRecords().get(0) : null;
+        if (weixinJsSdk == null) {
             TicketResponse ticketResponse = getTicketResponse();
             ticket = ticketResponse.getTicket();
 
-            jsSdk = new JsSdk();
-            jsSdk.setId(idWorker.nextId());
-            jsSdk.setTicket(ticket);
-            jsSdk.setCreateTime(new Date());
-            jsSdkMapper.insert(jsSdk);
-        } else if (isExpireOfCacheTicket(jsSdk.getCreateTime())) {
+            weixinJsSdk = new WeixinJsSdk();
+            weixinJsSdk.setId(idWorker.nextId());
+            weixinJsSdk.setTicket(ticket);
+            weixinJsSdk.setCreateTime(new Date());
+            weixinJsSdkMapper.insert(weixinJsSdk);
+        } else if (isExpireOfCacheTicket(weixinJsSdk.getCreateTime())) {
             TicketResponse ticketResponse = getTicketResponse();
             ticket = ticketResponse.getTicket();
 
-            jsSdk.setTicket(ticket);
-            jsSdk.setCreateTime(new Date());
-            jsSdkMapper.updateById(jsSdk);
+            weixinJsSdk.setTicket(ticket);
+            weixinJsSdk.setCreateTime(new Date());
+            weixinJsSdkMapper.updateById(weixinJsSdk);
         } else {
-            ticket = jsSdk.getTicket();
+            ticket = weixinJsSdk.getTicket();
+            log.info("从缓存命中ticket");
         }
         log.info("ticket {}", ticket);
         return ticket;
@@ -99,12 +101,12 @@ public class JsSdkService {
 
     public SignatureBO getSignatureBO(String url) {
         SignatureBO signatureBO = new SignatureBO();
-        signatureBO.setNoncestr("Wm3WZYTPz0wzccnW");
-        signatureBO.setAppId(jsSdkProperties.getAppid());
+        signatureBO.setNonceStr(RandomStringUtils.randomAlphanumeric(16));
+        signatureBO.setAppId(weixinJsSdkProperties.getAppid());
         signatureBO.setTimestamp(LocalDateTime.now().toEpochSecond(ZoneOffset.of("+8")) + "");
 
         Map<String, String> map = new HashMap<>();
-        map.put("noncestr", signatureBO.getNoncestr());
+        map.put("noncestr", signatureBO.getNonceStr());
         map.put("jsapi_ticket", getTicket());
         map.put("timestamp", signatureBO.getTimestamp());
         map.put("url", url);
@@ -136,7 +138,7 @@ public class JsSdkService {
      */
     private boolean isExpireOfCacheTicket(Date cacheCreateTime) {
         LocalDateTime createTime = LocalDateTime.ofInstant(cacheCreateTime.toInstant(), ZoneId.systemDefault());
-        LocalDateTime expireTime = createTime.plusSeconds(jsSdkProperties.getExpiresIn());
+        LocalDateTime expireTime = createTime.plusSeconds(weixinJsSdkProperties.getExpiresIn());
         return LocalDateTime.now().isAfter(expireTime);
     }
 
