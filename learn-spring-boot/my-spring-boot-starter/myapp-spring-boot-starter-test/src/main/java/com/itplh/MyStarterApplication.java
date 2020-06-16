@@ -1,7 +1,10 @@
 package com.itplh;
 
+import com.itplh.starter.HelloProperties;
+import com.itplh.starter.HelloService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 
 /**
  * @description:
@@ -13,6 +16,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class MyStarterApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(MyStarterApplication.class, args);
+        ConfigurableApplicationContext context = SpringApplication.run(MyStarterApplication.class, args);
+        System.out.println(context.getBean(HelloProperties.class));
+        System.out.println(context.getBean(HelloService.class));
     }
 }
