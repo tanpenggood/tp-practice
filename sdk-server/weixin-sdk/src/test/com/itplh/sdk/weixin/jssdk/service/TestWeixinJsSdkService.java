@@ -8,19 +8,19 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class TestWxJsSdkService {
+public class TestWeixinJsSdkService {
 
     @Autowired
-    private JsSdkService wxJsSdkService;
+    private WeixinJsSdkService weixinJsSdkService;
 
     @Test
     public void getAccessToken() {
-        System.out.println(wxJsSdkService.getAccessToken());
+        System.out.println(weixinJsSdkService.getAccessToken());
     }
 
     @Test
     public void getTicket() {
-        System.out.println(wxJsSdkService.getTicket());
+        System.out.println(weixinJsSdkService.getTicket());
     }
 
 }
