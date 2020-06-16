@@ -6,7 +6,13 @@ import lombok.Data;
 public class SignatureBO {
 
     private String appId;
-    private String noncestr;
+    /**
+     * 随机字符串
+     */
+    private String nonceStr;
+    /**
+     * 时间戳(秒)
+     */
     private String timestamp;
     private String signature;
 

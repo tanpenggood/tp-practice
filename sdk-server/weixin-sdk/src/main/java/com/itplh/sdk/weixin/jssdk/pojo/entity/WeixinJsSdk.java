@@ -1,7 +1,6 @@
 package com.itplh.sdk.weixin.jssdk.pojo.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.util.Date;
@@ -11,8 +10,7 @@ import java.util.Date;
  * @since: 2020-06-10 13:14
  */
 @Data
-@TableName("wx_js_sdk")
-public class JsSdk {
+public class WeixinJsSdk {
 
     @TableId
     private Long id;

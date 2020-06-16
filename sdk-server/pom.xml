@@ -9,7 +9,7 @@
     <modules>
         <module>sdk-common</module>
         <module>sdk-boot</module>
-        <module>wx-sdk</module>
+        <module>weixin-sdk</module>
     </modules>
     <name>sdk-server</name>
     <description>SDK对接</description>
