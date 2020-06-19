@@ -24,7 +24,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.itplh.section3SpringBoot的配置.point1应用配置.Usage1SpringApplication</mainClass>
+                    <mainClass>com.itplh.chapter4.section3SpringBoot的配置.point1应用配置.Usage1SpringApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>

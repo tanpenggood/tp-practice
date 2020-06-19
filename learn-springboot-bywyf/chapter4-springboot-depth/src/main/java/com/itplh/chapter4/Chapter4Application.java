@@ -1,4 +1,4 @@
-package com.itplh;
+package com.itplh.chapter4;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -7,6 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @since: 2020-06-06 23:43
  */
 @SpringBootApplication
-public class Application {
+public class Chapter4Application {
 
 }

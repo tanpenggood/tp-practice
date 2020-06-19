@@ -1,4 +1,4 @@
-package com.itplh.section8注解工作原理.point2BeanFactoryPostProcessor;
+package com.itplh.chapter3.section8注解工作原理.point2BeanFactoryPostProcessor;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
@@ -24,6 +24,6 @@ public class CustomBeanDefinitionRegistryPostProcessor implements BeanFactoryPos
         // b.为扫描器添加加包含注解@CustomBean的过滤器
         scanner.addIncludeFilter(new AnnotationTypeFilter(CustomBean.class));
         // c.在包com.itplh.section8注解工作原理.point2BeanFactoryPostProcessor中扫描注解
-        scanner.scan("com.itplh.section8注解工作原理.point2BeanFactoryPostProcessor");
+        scanner.scan("com.itplh.chapter3.section8注解工作原理.point2BeanFactoryPostProcessor");
     }
 }

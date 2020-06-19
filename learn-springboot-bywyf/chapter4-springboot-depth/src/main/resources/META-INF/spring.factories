@@ -1,2 +1,2 @@
 # Application Listeners
-org.springframework.context.ApplicationListener=com.itplh.listener.MyListener
+org.springframework.context.ApplicationListener=com.itplh.chapter4.listener.MyListener

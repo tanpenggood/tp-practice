@@ -1,7 +1,7 @@
-package com.itplh.section3SpringBoot的配置.point1应用配置;
+package com.itplh.chapter4.section3SpringBoot的配置.point1应用配置;
 
-import com.itplh.Application;
-import com.itplh.listener.MyListener;
+import com.itplh.chapter4.Chapter4Application;
+import com.itplh.chapter4.listener.MyListener;
 import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
 
@@ -12,7 +12,7 @@ import org.springframework.boot.SpringApplication;
 public class Usage1SpringApplication {
 
     public static void main(String[] args) {
-        SpringApplication app = new SpringApplication(Application.class);
+        SpringApplication app = new SpringApplication(Chapter4Application.class);
         // 设置关闭Banner
         app.setBannerMode(Banner.Mode.OFF);
         // 增加监听器

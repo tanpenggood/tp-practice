@@ -1,4 +1,4 @@
-package com.itplh.section3SpringBoot的配置.point3外部配置;
+package com.itplh.chapter4.section3SpringBoot的配置.point3外部配置;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
