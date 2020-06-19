@@ -1,4 +1,4 @@
-package com.itplh.listener;
+package com.itplh.chapter4.listener;
 
 import org.springframework.boot.context.event.ApplicationStartingEvent;
 import org.springframework.context.ApplicationListener;

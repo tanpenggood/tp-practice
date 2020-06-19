@@ -1,6 +1,6 @@
-package com.itplh.section3SpringBoot的配置.point1应用配置;
+package com.itplh.chapter4.section3SpringBoot的配置.point1应用配置;
 
-import com.itplh.Application;
+import com.itplh.chapter4.Chapter4Application;
 import org.springframework.boot.SpringApplication;
 
 /**
@@ -17,6 +17,6 @@ import org.springframework.boot.SpringApplication;
 public class Usage4其他默认配置 {
 
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run(Chapter4Application.class, args);
     }
 }

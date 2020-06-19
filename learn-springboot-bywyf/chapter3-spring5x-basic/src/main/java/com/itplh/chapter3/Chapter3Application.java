@@ -1,4 +1,4 @@
-package com.itplh;
+package com.itplh.chapter3;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,10 +9,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @since : 2020-06-06 14:51
  */
 @SpringBootApplication
-public class Application {
+public class Chapter3Application {
 
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run(Chapter3Application.class, args);
     }
 
 }

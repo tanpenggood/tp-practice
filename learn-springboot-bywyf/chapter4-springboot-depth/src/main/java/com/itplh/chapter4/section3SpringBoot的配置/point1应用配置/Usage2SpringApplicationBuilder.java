@@ -1,7 +1,7 @@
-package com.itplh.section3SpringBoot的配置.point1应用配置;
+package com.itplh.chapter4.section3SpringBoot的配置.point1应用配置;
 
-import com.itplh.Application;
-import com.itplh.listener.MyListener;
+import com.itplh.chapter4.Chapter4Application;
+import com.itplh.chapter4.listener.MyListener;
 import org.springframework.boot.Banner;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 
@@ -15,7 +15,7 @@ public class Usage2SpringApplicationBuilder {
         new SpringApplicationBuilder()
                 .bannerMode(Banner.Mode.OFF)
                 .listeners(new MyListener())
-                .sources(Application.class)
+                .sources(Chapter4Application.class)
                 .build(args)
                 .run();
     }

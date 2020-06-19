@@ -1,6 +1,4 @@
-package com.itplh.section8注解工作原理.point2BeanFactoryPostProcessor;
-
-import org.springframework.stereotype.Service;
+package com.itplh.chapter3.section8注解工作原理.point2BeanFactoryPostProcessor;
 
 /**
  * @author: tanpenggood
