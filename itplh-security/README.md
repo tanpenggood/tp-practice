@@ -14,5 +14,9 @@
     - 学习自定义 interceptor
     - 学习自定义 aspect
     - 学习 REST 接口多线程编程
+        - itplh-security-demo 
+            - `com.itplh.web.async.AsyncCallableController`
+            - `com.itplh.web.async.AsyncDeferredResultController`
+            - `com.itplh.web.async.AsyncResponseBodyEmitterController`
 - spring-boot-2x
     - itplh-security-distributed 分布式用户认证中心(基于OAuth2.0)
