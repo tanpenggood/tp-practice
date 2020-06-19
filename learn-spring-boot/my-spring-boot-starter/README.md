@@ -8,7 +8,6 @@
     2. myapp-spring-boot-starter `依赖1`
     3. myapp-spring-boot-starter-test `依赖2` 测试工程
 
-
 ## 编写一个spring-boot-starter的步骤
    
 - 创建名字为 `xxx-spring-boot-starter` 的启动器项目
@@ -23,6 +22,20 @@
 ## 使用自定义的spring-boot-starter
 - 项目引入 `xxx-spring-boot-starter`
 - 配置需要配置的信息
+
+## 自动装配原理
+
+- HelloAutoConfiguration
+    
+    通过`META-INF/spring.factories`中的配置将其注册为Spring容器管理的Bean
+
+- HelloProperties
+
+    通过`HelloAutoConfiguration`中的`EnableConfigurationProperties`注解将其注册为Spring容器管理的Bean
+
+- HelloService
+
+    通过`HelloAutoConfiguration`中的`Bean + Conditional系列`条件控制将其注册为Spring容器管理的Bean
 
 ## 参考
 
