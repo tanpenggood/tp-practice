@@ -21,12 +21,14 @@ module.exports = {
   pluginOptions: {
     electronBuilder: {
       builderOptions: {
+        // 设置APP及安装包图标
         win: {
           icon: './public/app.ico'
         },
         mac: {
           icon: './public/app.png'
         },
+        // 设置APP名称
         productName: 'AppDemo'
       }
     }
