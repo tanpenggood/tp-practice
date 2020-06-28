@@ -71,14 +71,8 @@ app.on('activate', () => {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', async () => {
-  if (isDevelopment && !process.env.IS_TEST) {
-    // Install Vue Devtools
-    try {
-      // await installVueDevtools()
-    } catch (e) {
-      console.error('Vue Devtools failed to install:', e.toString())
-    }
-  }
+  // 安装Vue开发工具
+  // await _installVueDevtools()
   createWindow()
 })
 
@@ -119,5 +113,19 @@ function createMenu () {
   } else {
     // windows及linux系统
     Menu.setApplicationMenu(null)
+  }
+}
+
+/**
+ * 安装Vue开发工具
+ */
+async function _installVueDevtools() {
+  if (isDevelopment && !process.env.IS_TEST) {
+    // Install Vue Devtools
+    try {
+      await installVueDevtools()
+    } catch (e) {
+      console.error('Vue Devtools failed to install:', e.toString())
+    }
   }
 }
