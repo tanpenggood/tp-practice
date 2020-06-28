@@ -1,6 +1,6 @@
 const path = require('path');
 
-function resolve (dir) {
+function resolve(dir) {
   return path.join(__dirname, dir);
 }
 
@@ -23,8 +23,7 @@ module.exports = {
       builderOptions: {
         win: {
           icon: './public/app.ico'
-        }
-        ,
+        },
         mac: {
           icon: './public/app.png'
         },

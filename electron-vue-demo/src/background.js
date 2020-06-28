@@ -4,6 +4,8 @@ import { app, BrowserWindow, protocol, Menu } from 'electron'
 import { createProtocol, installVueDevtools } from 'vue-cli-plugin-electron-builder/lib'
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
+const isDarwin = process.platform === 'darwin'
+const isWin32 = process.platform === 'win32'
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -26,8 +28,9 @@ function createWindow() {
       // 取消跨域限制
       webSecurity: false,
     },
-    // 设置APP窗口图标 eslint-disable-next-line no-undef
-    icon: `${__static}/app.ico`
+    // 设置APP窗口图标
+    // eslint-disable-next-line no-undef
+    icon: isDarwin ? `${__static}/app.png` : `${__static}/app.ico`
   })
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
@@ -51,7 +54,7 @@ function createWindow() {
 app.on('window-all-closed', () => {
   // On macOS it is common for applications and their menu bar
   // to stay active until the user quits explicitly with Cmd + Q
-  if (process.platform !== 'darwin') {
+  if (!isDarwin) {
     app.quit()
   }
 })
@@ -71,7 +74,7 @@ app.on('ready', async () => {
   if (isDevelopment && !process.env.IS_TEST) {
     // Install Vue Devtools
     try {
-      await installVueDevtools()
+      // await installVueDevtools()
     } catch (e) {
       console.error('Vue Devtools failed to install:', e.toString())
     }
@@ -81,7 +84,7 @@ app.on('ready', async () => {
 
 // Exit cleanly on request from parent process in development mode.
 if (isDevelopment) {
-  if (process.platform === 'win32') {
+  if (isWin32) {
     process.on('message', (data) => {
       if (data === 'graceful-exit') {
         app.quit()
@@ -99,7 +102,7 @@ if (isDevelopment) {
  */
 function createMenu () {
   // darwin表示macOS，针对macOS的设置
-  if (process.platform === 'darwin') {
+  if (isDarwin) {
     const template = [
       {
         label: 'App Demo',
