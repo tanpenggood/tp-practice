@@ -10,6 +10,8 @@
 | bk-java|使用Jsoup抓取贝壳房源信息|jsoup 1.11.2|
 | ce4j                      | 基于java.lang.Runtime封装的用于简化java调用命令行的工具 |                                          |
 | cloud-parent              | spring cloud学习demo                     | spring boot 2.1.10.RELEASE <br/> spring cloud Greenwich.SR4 |
+| electron-demo             | `electron 9` 构建跨平台的桌面应用程序      | electron 9.0.5 <br/>|
+| electron-vue-demo         | `electron 9`+`vue-cli 3`开发跨平台桌面应用 | vue 2.6.11 <br/> electron 9.0.0 <br/> vue-cli 3.8.4 <br/>|
 | house                     | interceptor学习                          | spring boot 2.2.1.RELEASE                |
 | itplh-security            | 学习 spring security <br/> OAuth2.0初探 <br/> 学习编写 REST 接口测试用例 <br/> 学习自定义 validator <br/> 学习自定义 filter <br/> 学习自定义 interceptor <br/> 自定义 aspect <br/> 学习 REST 接口多线程编程 <br/> Thread#start Thread#stop| spring boot 1.5.20.RELEASE <br/> spring cloud Dalston.SR2|
 | itplh-sso                 | jwt + oauth2.0 实现单点登录               | spring boot 1.5.20.RELEASE <br/> spring cloud Dalston.SR2 <br/><br/> spring boot 2.1.13.RELEASE<br/>spring cloud Greenwich.SR5|
