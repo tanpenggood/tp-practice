@@ -21,6 +21,8 @@
 | learn-io                  | 复习多线程<br/> 复习BIO<br/> 学习NIO<br/> 学习Netty<br/> 自定义RPC| java8|
 | learn-react               | react学习demo                            | 16.12.0                                  |
 | learn-spring-boot         | 学习使用spring boot <br/>1. 自定义spring-boot起步依赖 <br/>2. spring boot 整合 websocket 打造在线聊天室 <br/>3. Spring Security安全认证框架入门| spring boot 2.1.13.RELEASE|
+| learn-springboot-bywyf    | 学习《从企业级开发到云原生微服务：Spring Boot 实战》笔记 | spring boot 2.2.5.RELEASE|
+| sdk-server                | sdk-server | spring boot 2.1.13.RELEASE |
 | **准备中...**                |                                        |                                          |
 | learn-spi                 | java的spi思想                             |                                          |
 | imooc-interview-google    | Java校招面试 Google面试官亲授                   |                                          |
