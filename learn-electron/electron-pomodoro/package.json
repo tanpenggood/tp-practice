@@ -1,0 +1,16 @@
+{
+  "name": "electron-pomodoro",
+  "version": "1.0.0",
+  "description": "使用 electron 构建一个番茄钟。",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "tanpenggood",
+  "license": "ISC",
+  "devDependencies": {},
+  "dependencies": {
+    "electron": "^9.0.5",
+    "timer.js": "^1.0.4"
+  }
+}
