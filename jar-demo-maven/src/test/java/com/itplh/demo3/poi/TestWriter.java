@@ -18,7 +18,7 @@ import java.util.List;
 
 /**
  * @description:
- * @author: tanpeng
+ * @author: tanpenggood
  * @date: 2020-02-17 15:16
  * @version: v1.0.0
  */
@@ -35,7 +35,7 @@ public class TestWriter {
      * 2、构建Sheet
      * 3、构建head及数据
      * 4、生成文件
-     * @author: tanpeng
+     * @author: tanpenggood
      * @date : 2020-02-17 15:59
      * @version: v1.0.0
      */

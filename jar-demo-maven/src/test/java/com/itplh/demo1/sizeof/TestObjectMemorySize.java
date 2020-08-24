@@ -13,7 +13,7 @@ import java.util.HashMap;
 
 /**
  * @description:
- * @author: tanpeng
+ * @author: tanpenggood
  * @date: 2020-02-06 12:43
  * @version: v1.0.0
  */
@@ -22,7 +22,7 @@ public class TestObjectMemorySize {
     /**
      * @description: 测试15W initialCapacity为6的Map，每个Map三条数据的所占内存的大小
      * 2020-02-06 12:47:08 object size: 29440616
-     * @author: tanpeng
+     * @author: tanpenggood
      * @date : 2020-02-06 12:50
      * @version: v1.0.0
      */
@@ -42,7 +42,7 @@ public class TestObjectMemorySize {
     /**
      * @description: 测试15W initialCapacity为默认值的Map，每个Map三条数据的所占内存的大小
      * 2020-02-06 12:47:08 object size: 34240616
-     * @author: tanpeng
+     * @author: tanpenggood
      * @date : 2020-02-06 12:50
      * @version: v1.0.0
      */
@@ -61,7 +61,7 @@ public class TestObjectMemorySize {
 
     /**
      * @description: 记录对象大小
-     * @author: tanpeng
+     * @author: tanpenggood
      * @date : 2020/2/5 15:35
      * @version: v1.0.0
      */

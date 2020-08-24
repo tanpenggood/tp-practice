@@ -17,7 +17,7 @@ import java.util.Arrays;
 
 /**
  * @description:
- * @author: tanpeng
+ * @author: tanpenggood
  * @date: 2020-02-17 11:23
  * @version: v1.0.0
  */
@@ -31,7 +31,7 @@ public class TestReader {
      * 1、获取输入流
      * 2、获取{@link Workbook}对象
      * 3、解析Workbook对象，提取数据
-     * @author: tanpeng
+     * @author: tanpenggood
      * @date : 2020-02-17 12:52
      * @version: v1.0.0
      */
@@ -62,7 +62,7 @@ public class TestReader {
 
     /**
      * @description: 解析Workbook对象，获取数据
-     * @author: tanpeng
+     * @author: tanpenggood
      * @date : 2020-02-17 12:10
      * @version: v1.0.0
      */
@@ -81,7 +81,7 @@ public class TestReader {
 
     /**
      * @description: 将单元格内容转换为字符串
-     * @author: tanpeng
+     * @author: tanpenggood
      * @date : 2020-02-17 12:10
      * @version: v1.0.0
      */
