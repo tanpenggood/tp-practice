@@ -15,6 +15,13 @@ yarn serve
 yarn build
 ```
 
+**setup taobao mirror source**
+
+```
+ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/
+ELECTRON_BUILDER_BINARIES_MIRROR=http://npm.taobao.org/mirrors/electron-builder-binaries/
+```
+
 ### Lints and fixes files
 ```
 yarn lint
