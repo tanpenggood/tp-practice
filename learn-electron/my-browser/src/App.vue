@@ -2,7 +2,8 @@
 	<div id="app">
 		<input class="search-input" v-model="q"/>
 		<ul>
-			<li><a href="https://github.com/tanpenggood" target="_blank">github tanpenggood</a></li>
+			<li><a href="https://github.com/tanpenggood" target="_blank">Github</a></li>
+			<li><a href="https://gitee.com/tanpenggood" target="_blank">Gitee</a></li>
 			<li><a href="http://showdoc.itplh.com" target="_blank">ShowDoc</a></li>
 			<li><a href="https://blog.csdn.net/AV_woaijava" target="_blank">CSDN 花田小苏</a></li>
 		</ul>
