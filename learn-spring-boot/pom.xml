@@ -12,6 +12,7 @@
         <module>learn-websocket</module>
         <module>learn-spring-security</module>
         <module>my-enable-annotation</module>
+        <module>learn-spring-event</module>
     </modules>
     <packaging>pom</packaging>
 
