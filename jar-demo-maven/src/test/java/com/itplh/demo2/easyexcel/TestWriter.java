@@ -15,7 +15,7 @@ import java.util.List;
 
 /**
  * @description:
- * @author: tanpeng
+ * @author: tanpenggood
  * @date: 2020-02-07 14:43
  * @version: v1.0.0
  */
@@ -73,7 +73,7 @@ public class TestWriter {
      * 2、构建{@link WriteSheet}
      * 3、往sheet写入数据
      * 4、调用{@link ExcelWriter#finish()}，否则数据不会写到文件中
-     * @author: tanpeng
+     * @author: tanpenggood
      * @date : 2020-02-14 11:22
      * @version: v1.0.0
      */
@@ -101,7 +101,7 @@ public class TestWriter {
 
     /**
      * @description: 分页查询、分批写数据
-     * @author: tanpeng
+     * @author: tanpenggood
      * @date : 2020-02-28 10:30
      * @version: v1.0.0
      */
@@ -121,7 +121,7 @@ public class TestWriter {
      * 2、获取总sheet数 sheetCount
      * 3、分批写入数据
      * 4、释放资源
-     * @author: tanpeng
+     * @author: tanpenggood
      * @date : 2020-03-02 21:27
      * @version: v1.0.0
      */
@@ -170,7 +170,7 @@ public class TestWriter {
 
     /**
      * @description: 生成模拟数据
-     * @author: tanpeng
+     * @author: tanpenggood
      * @date : 2020-02-07 14:40
      * @version: v1.0.0
      */

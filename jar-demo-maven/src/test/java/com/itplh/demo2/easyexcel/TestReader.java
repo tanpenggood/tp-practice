@@ -23,7 +23,7 @@ import java.util.List;
 
 /**
  * @description:
- * @author: tanpeng
+ * @author: tanpenggood
  * @date: 2020-02-07 14:43
  * @version: v1.0.0
  */
@@ -54,7 +54,7 @@ public class TestReader {
 
     /**
      * @description: 同步读
-     * @author: tanpeng
+     * @author: tanpenggood
      * @date : 2020-02-07 15:57
      * @version: v1.0.0
      */
@@ -73,7 +73,7 @@ public class TestReader {
      * 2、构建{@link ReadSheet}
      * 3、读取sheet的数据
      * 4、调用{@link ExcelReader#finish()}，读的时候会创建临时文件，到时磁盘会崩的
-     * @author: tanpeng
+     * @author: tanpenggood
      * @date : 2020-02-14 12:06
      * @version: v1.0.0
      */
@@ -103,7 +103,7 @@ public class TestReader {
 
     /**
      * @description: 读取所有sheet的数据
-     * @author: tanpeng
+     * @author: tanpenggood
      * @date : 2020-02-13 10:50
      * @version: v1.0.0
      */
@@ -148,7 +148,7 @@ public class TestReader {
     /**
      * @description: 指定自定义转换器读
      * 返回指定对象 {@link ReaderData}
-     * @author: tanpeng
+     * @author: tanpenggood
      * @date : 2020-02-07 15:11
      * @version: v1.0.0
      */
@@ -171,7 +171,7 @@ public class TestReader {
      * -Xms64m  -Xmx64m  70560ms
      * -Xms128m -Xmx128m 65475ms
      * -Xms512m -Xmx512m 65364ms
-     * @author: tanpeng
+     * @author: tanpenggood
      * @date : 2020-03-02 21:35
      * @version: v1.0.0
      */
