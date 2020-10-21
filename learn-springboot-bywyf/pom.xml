@@ -11,6 +11,7 @@
         <module>chapter3-spring5x-basic</module>
         <module>chapter4-springboot-depth</module>
         <module>chapter5-spring-web-mvc</module>
+        <module>chapter6-data-access</module>
     </modules>
     <packaging>pom</packaging>
     <description>学习《从企业级开发到云原生微服务：Spring Boot 实战》笔记</description>
