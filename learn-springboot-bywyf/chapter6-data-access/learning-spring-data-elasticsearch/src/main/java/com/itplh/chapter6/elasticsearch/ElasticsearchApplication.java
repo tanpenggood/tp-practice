@@ -9,9 +9,13 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * @author: tanpenggood
@@ -25,6 +29,24 @@ public class ElasticsearchApplication {
     }
 
     @Bean
+    CommandLineRunner query(PersonRepository personRepository) {
+        return args -> {
+            List<Person> person1 = personRepository.findByName("tp");
+            List<Person> person2 = personRepository.findByAddress_City("bei jing");
+            List<Person> person3 = personRepository.findByChildren_Name("ccc");
+            Page<Person> personPage = personRepository.findByAgeRange(20, 30,
+                    PageRequest.of(0, 3, Sort.by(Sort.Direction.DESC, "age")));
+            person1.forEach(System.out::println);
+            person2.forEach(System.out::println);
+            person3.forEach(System.out::println);
+            System.out.printf("总数为：%s 总页数为：%s\n",
+                    personPage.getTotalElements(),
+                    personPage.getTotalPages());
+            personPage.forEach(System.out::println);
+        };
+    }
+
+    //    @Bean
     CommandLineRunner saveAll(PersonRepository personRepository) {
         return args -> {
             Address address = new Address("chong qing", "chong qing");
