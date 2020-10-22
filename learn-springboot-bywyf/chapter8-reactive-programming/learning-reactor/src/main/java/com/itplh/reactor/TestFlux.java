@@ -4,6 +4,7 @@ import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 import reactor.core.publisher.Flux;
 
+import java.util.Comparator;
 import java.util.stream.Stream;
 
 /**
@@ -15,11 +16,15 @@ import java.util.stream.Stream;
 public class TestFlux {
 
     public static void main(String[] args) {
+        // 1. 构建发布者
         Flux<String> flux1 = Flux.just("a", "b", "b");
         Flux<String> flux2 = Flux.fromArray(new String[]{"c", "d", "e"});
         Flux<String> flux3 = Flux.fromStream(Stream.of("e", "f", "g"));
         Flux<Integer> flux4 = Flux.range(2020, 3);
 
+        // 2. 订阅发布者
+        // 若不主动订阅发布者，则不会有任何数据被发送。
+        // 订阅者既可以是Consumer函数接口，也可以是Subscriber接口的实现。
         flux1.subscribe(System.out::print);
         System.out.println();
         flux2.subscribe(System.out::print);
@@ -54,5 +59,13 @@ public class TestFlux {
                 System.out.println("处理完成");
             }
         });
+
+        // 3. 处理操作
+        // 像Stream一样对其中的数据进行处理操作
+        Flux.just(1, 6, 4, 3, 5, 2)
+                .map(n -> n * 3)
+                .filter(n -> n % 2 == 0)
+                .sort(Comparator.comparingInt(Integer::intValue))
+                .subscribe(System.out::println);
     }
 }
