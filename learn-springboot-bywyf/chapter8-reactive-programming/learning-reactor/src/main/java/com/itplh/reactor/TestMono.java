@@ -5,6 +5,8 @@ import org.reactivestreams.Subscription;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.stream.Stream;
+
 /**
  * Mono 可以发送 0 到 1 个数据。
  *
@@ -57,6 +59,23 @@ public class TestMono {
                 .filter(s -> s.length() > 5)
                 .map(String::toUpperCase)
                 .subscribe(System.out::println);
+
+        // 4. 可重复消费
+        // publisher可以被调用多次（不同于Java中的Stream，只能消费一次），每一次调用都会开始一个新的Subscription
+        // 每一个订阅只为一个订阅者服务
+        // Subscription 订阅，代表一次订阅者订阅发布者的生命周期。它只能被一个订阅者使用，既可以用来通知传送数据，也可以取消传送数据。
+        mono1.subscribe(System.out::print);
+        System.out.println();
+        mono1.subscribe(System.out::print);
+        System.out.println();
+        mono1.subscribe(System.out::print);
+        System.out.println();
+
+        Stream<Integer> stream = Stream.of(1, 2, 3, 4, 5);
+        stream.forEach(System.out::print);
+        System.out.println();
+        // 第二次消费stream，抛出异常 java.lang.IllegalStateException: stream has already been operated upon or closed
+        stream.forEach(System.out::print);
     }
 
 }
