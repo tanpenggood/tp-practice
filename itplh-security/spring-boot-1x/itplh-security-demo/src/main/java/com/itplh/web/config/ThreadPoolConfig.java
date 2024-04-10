@@ -22,7 +22,7 @@ public class ThreadPoolConfig {
         threadPool.setMaxPoolSize(Runtime.getRuntime().availableProcessors() + 1);
         threadPool.setKeepAliveSeconds(60);
         threadPool.setQueueCapacity(512);
-        threadPool.setThreadNamePrefix("aden-tp-");
+        threadPool.setThreadNamePrefix("my-tp-");
         threadPool.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
         threadPool.initialize();
         return threadPool;
